@@ -2850,6 +2850,224 @@
   });
   });
 
+  var webflowTabs = __commonjs(function (module) {
+  /**
+   * Webflow: Tabs component
+   */
+
+  var Webflow = require$$0;
+  var IXEvents = require$$0$2;
+
+  Webflow.define('tabs', module.exports = function($) {
+    var api = {};
+    var tram = $.tram;
+    var $doc = $(document);
+    var $tabs;
+    var design;
+    var env = Webflow.env;
+    var safari = env.safari;
+    var inApp = env();
+    var tabAttr = 'data-w-tab';
+    var namespace = '.w-tabs';
+    var linkCurrent = 'w--current';
+    var tabActive = 'w--tab-active';
+    var ix = IXEvents.triggers;
+    var inRedraw = false;
+
+    // -----------------------------------
+    // Module methods
+
+    api.ready = api.design = api.preview = init;
+
+    api.redraw = function() {
+      inRedraw = true;
+      init();
+      inRedraw = false;
+    };
+
+    api.destroy = function() {
+      $tabs = $doc.find(namespace);
+      if (!$tabs.length) return;
+      $tabs.each(resetIX);
+      removeListeners();
+    };
+
+    // -----------------------------------
+    // Private methods
+
+    function init() {
+      design = inApp && Webflow.env('design');
+
+      // Find all instances on the page
+      $tabs = $doc.find(namespace);
+      if (!$tabs.length) return;
+      $tabs.each(build);
+      if (Webflow.env('preview') && !inRedraw) {
+        $tabs.each(resetIX);
+      }
+
+      removeListeners();
+      addListeners();
+    }
+
+    function removeListeners() {
+      Webflow.redraw.off(api.redraw);
+    }
+
+    function addListeners() {
+      Webflow.redraw.on(api.redraw);
+    }
+
+    function resetIX(i, el) {
+      var data = $.data(el, namespace);
+      if (!data) return;
+      data.links && data.links.each(ix.reset);
+      data.panes && data.panes.each(ix.reset);
+    }
+
+    function build(i, el) {
+      var $el = $(el);
+
+      // Store state in data
+      var data = $.data(el, namespace);
+      if (!data) data = $.data(el, namespace, { el: $el, config: {} });
+      data.current = null;
+      data.menu = $el.children('.w-tab-menu');
+      data.links = data.menu.children('.w-tab-link');
+      data.content = $el.children('.w-tab-content');
+      data.panes = data.content.children('.w-tab-pane');
+
+      // Remove old events
+      data.el.off(namespace);
+      data.links.off(namespace);
+
+      // Set config from data attributes
+      configure(data);
+
+      // Wire up events when not in design mode
+      if (!design) {
+        data.links.on('click' + namespace, linkSelect(data));
+
+        // Trigger first intro event from current tab
+        var $link = data.links.filter('.' + linkCurrent);
+        var tab = $link.attr(tabAttr);
+        tab && changeTab(data, { tab: tab, immediate: true });
+      }
+    }
+
+    function configure(data) {
+      var config = {};
+
+      // Set config options from data attributes
+      config.easing = data.el.attr('data-easing') || 'ease';
+
+      var intro = parseInt(data.el.attr('data-duration-in'), 10);
+      intro = config.intro = intro === intro ? intro : 0;
+
+      var outro = parseInt(data.el.attr('data-duration-out'), 10);
+      outro = config.outro = outro === outro ? outro : 0;
+
+      config.immediate = !intro && !outro;
+
+      // Store config in data
+      data.config = config;
+    }
+
+    function linkSelect(data) {
+      return function(evt) {
+        var tab = evt.currentTarget.getAttribute(tabAttr);
+        tab && changeTab(data, { tab: tab });
+      };
+    }
+
+    function changeTab(data, options) {
+      options = options || {};
+
+      var config = data.config;
+      var easing = config.easing;
+      var tab = options.tab;
+
+      // Don't select the same tab twice
+      if (tab === data.current) return;
+      data.current = tab;
+
+      // Select the current link
+      data.links.each(function(i, el) {
+        var $el = $(el);
+        if (el.getAttribute(tabAttr) === tab) $el.addClass(linkCurrent).each(ix.intro);
+        else if ($el.hasClass(linkCurrent)) $el.removeClass(linkCurrent).each(ix.outro);
+      });
+
+      // Find the new tab panes and keep track of previous
+      var targets = [];
+      var previous = [];
+      data.panes.each(function(i, el) {
+        var $el = $(el);
+        if (el.getAttribute(tabAttr) === tab) {
+          targets.push(el);
+        } else if ($el.hasClass(tabActive)) {
+          previous.push(el);
+        }
+      });
+
+      var $targets = $(targets);
+      var $previous = $(previous);
+
+      // Switch tabs immediately and bypass transitions
+      if (options.immediate || config.immediate) {
+        $targets.addClass(tabActive).each(ix.intro);
+        $previous.removeClass(tabActive);
+        // Redraw to benefit components in the hidden tab pane
+        // But only if not currently in the middle of a redraw
+        if (!inRedraw) Webflow.redraw.up();
+        return;
+      }
+
+      // Fade out the currently active tab before intro
+      if ($previous.length && config.outro) {
+        $previous.each(ix.outro);
+        tram($previous)
+          .add('opacity ' + config.outro + 'ms ' + easing, { fallback: safari })
+          .start({ opacity: 0 })
+          .then(intro);
+      } else {
+        // Skip the outro and play intro
+        intro();
+      }
+
+      // Fade in the new target
+      function intro() {
+        // Clear previous active class + styles touched by tram
+        // We cannot remove the whole inline style because it could be dynamically bound
+        $previous.removeClass(tabActive).css({
+          opacity: '',
+          transition: '',
+          transform: '',
+          width: '',
+          height: ''
+        });
+
+        // Add active class to new target
+        $targets.addClass(tabActive).each(ix.intro);
+        Webflow.redraw.up();
+
+        // Set opacity immediately if intro is zero
+        if (!config.intro) return tram($targets).set({ opacity: 1 });
+
+        // Otherwise fade in opacity
+        tram($targets)
+          .set({ opacity: 0 })
+          .redraw()
+          .add('opacity ' + config.intro + 'ms ' + easing, { fallback: safari })
+          .start({ opacity: 1 });
+      }
+    }
+
+    // Export module
+    return api;
+  });
+  });
+
   var webflowTouch = __commonjs(function (module) {
   /**
    * Webflow: Touch events
@@ -3004,7 +3222,11 @@ Webflow.require('ix').init([
   {"slug":"bounce-in-scroll-in","name":"Bounce in (scroll in)","value":{"style":{"opacity":0,"scaleX":0.6000000000000005,"scaleY":0.6000000000000005,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 600ms ease 0ms, opacity 600ms ease 0ms","scaleX":1.08,"scaleY":1.08,"scaleZ":1},{"transition":"transform 150ms ease-out-cubic 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
   {"slug":"scale-on-scroll","name":"Scale on Scroll","value":{"style":{"opacity":0,"scaleX":0.01,"scaleY":0.01,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 600ms ease 0ms, opacity 600ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
   {"slug":"new-interaction","name":"New Interaction","value":{"style":{},"triggers":[]}},
-  {"slug":"bounce-down","name":"bounce down","value":{"style":{},"triggers":[{"type":"load","loopA":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"10px","z":"0px"},{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"},{"wait":"800ms","transition":"transform 200 ease 0"}],"stepsB":[]}]}},
+  {"slug":"bounce-down","name":"bounce down","value":{"style":{},"triggers":[{"type":"load","loopA":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"10px","z":"0px"},{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"},{"wait":"600ms","transition":"transform 200 ease 0"}],"stepsB":[]}]}},
   {"slug":"hamburger-menu","name":"hamburger menu","value":{"style":{},"triggers":[{"type":"navbar","selector":".top","preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"45deg","x":"7.5px","y":"7.5px","z":"0px"}],"stepsB":[{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]},{"type":"navbar","selector":".bottom","preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-45deg","x":"7.5px","y":"-7.5px","z":"0px"}],"stepsB":[{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]},{"type":"navbar","selector":".middle","stepsA":[{"width":"0px","transition":"width 200 ease 0"}],"stepsB":[{"transition":"width 200 ease 0"}]}]}},
-  {"slug":"hover-appear-image","name":"hover appear image","value":{"style":{},"triggers":[{"type":"hover","stepsA":[{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":0,"transition":"opacity 200ms ease 0"}]}]}}
+  {"slug":"hover-appear-image","name":"hover appear image","value":{"style":{},"triggers":[{"type":"hover","stepsA":[{"opacity":1,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":0,"transition":"opacity 200ms ease 0"}]}]}},
+  {"slug":"nav-bar","name":"nav bar","value":{"style":{},"triggers":[{"type":"navbar","selector":".topline","preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"20px","z":"0px","rotateX":"0deg","rotateY":"0deg","rotateZ":"45deg"},{"transition":"transform 200 ease 0","skewX":"0deg","skewY":"0deg"},{"display":"block"}],"stepsB":[{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"},{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"}]},{"type":"navbar","selector":".middleline","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[{}]},{"type":"navbar","selector":".bottomline","preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"20px","z":"0px"},{"transition":"transform 200 ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"-45deg"}],"stepsB":[{}]}]}},
+  {"slug":"on-hover-text-fade-in","name":"on hover text fade in","value":{"style":{},"triggers":[{"type":"hover","selector":".on-hover-text","preserve3d":true,"stepsA":[{"opacity":1,"transition":"transform 200 ease 0, opacity 200 ease 0"},{"transition":"transform 100ms ease 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[{"opacity":0,"transition":"opacity 200 ease 0"},{"transition":"transform 100ms ease 0","scaleX":1.1,"scaleY":1.1,"scaleZ":1}]}]}},
+  {"slug":"on-hove-text-fade-in-and-out","name":"on hove text fade in and out","value":{"style":{"scaleX":1.1,"scaleY":1.1,"scaleZ":1},"triggers":[{"type":"hover","stepsA":[{"opacity":1,"transition":"opacity 500ms ease 0, transform 200 ease 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[{"opacity":0,"transition":"opacity 500ms ease 0, transform 200 ease 0","scaleX":1.1,"scaleY":1.1,"scaleZ":1}]}]}},
+  {"slug":"new-interaction-2","name":"New Interaction 2","value":{"style":{},"triggers":[{"type":"navbar","stepsA":[],"stepsB":[]}]}}
 ]);
