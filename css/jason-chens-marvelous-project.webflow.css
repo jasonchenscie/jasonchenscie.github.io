@@ -8,7 +8,7 @@ body {
 h1 {
   margin-top: 0px;
   margin-bottom: 20px;
-  font-family: Roboto, sans-serif;
+  font-family: Roboto;
   font-size: 35px;
   line-height: 40px;
   font-weight: 500;
@@ -17,7 +17,7 @@ h1 {
 h2 {
   margin-top: 0px;
   margin-bottom: 20px;
-  font-family: Roboto, sans-serif;
+  font-family: Roboto;
   font-size: 32px;
   line-height: 36px;
   font-weight: 500;
@@ -35,7 +35,7 @@ h3 {
 h4 {
   margin-top: 0px;
   margin-bottom: 20px;
-  font-family: Roboto, sans-serif;
+  font-family: Roboto;
   font-size: 20px;
   line-height: 27px;
   font-weight: 500;
@@ -53,7 +53,7 @@ h5 {
 h6 {
   margin-top: 0px;
   margin-bottom: 20px;
-  font-family: Roboto, sans-serif;
+  font-family: Roboto;
   font-size: 16px;
   line-height: 22px;
   font-weight: 500;
@@ -1191,7 +1191,7 @@ figcaption {
 }
 
 .image-4 {
-  display: block;
+  display: none;
   margin-bottom: 0%;
   background-color: #ddd;
 }
@@ -1927,7 +1927,7 @@ figcaption {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  padding: 5% 0% 0%;
+  padding: 2% 0% 0%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2317,7 +2317,7 @@ figcaption {
 }
 
 .div-block-30 {
-  margin-top: 3%;
+  margin-top: 1%;
 }
 
 .image-21 {
@@ -2573,7 +2573,7 @@ figcaption {
 }
 
 .sell-title {
-  margin-bottom: 5px;
+  margin-bottom: 1%;
   padding-left: 15%;
   font-family: freight-big-pro, sans-serif;
   font-weight: 400;
@@ -2587,10 +2587,31 @@ figcaption {
 }
 
 .sell-block {
+  display: block;
   margin-top: 18%;
   margin-bottom: 7%;
   padding-right: 10%;
   padding-left: 10%;
+}
+
+.sell-block.vid {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .text-block-12 {
@@ -2719,11 +2740,16 @@ figcaption {
 }
 
 .sell-title-2 {
-  margin-bottom: 1%;
+  margin-bottom: 2%;
   padding-right: 15%;
   padding-left: 15%;
   font-family: freight-big-pro, sans-serif;
   font-weight: 400;
+  text-align: center;
+}
+
+.sell-title-2.pin {
+  margin-top: 5%;
   text-align: center;
 }
 
@@ -2835,6 +2861,11 @@ figcaption {
   background-color: hsla(0, 0%, 66%, .24);
 }
 
+.button-3.pin {
+  margin-right: 1%;
+  margin-left: 0%;
+}
+
 .image-26 {
   max-width: 50%;
 }
@@ -2910,7 +2941,7 @@ figcaption {
 }
 
 .role-des {
-  margin-top: 2%;
+  margin-top: 0%;
   padding-right: 20%;
   padding-left: 20%;
   font-family: proxima-nova, sans-serif;
@@ -3735,6 +3766,10 @@ figcaption {
   background-color: #ffd24a;
 }
 
+.div-block-74.pin {
+  background-color: #8fe093;
+}
+
 .container-9 {
   display: -webkit-box;
   display: -webkit-flex;
@@ -3809,9 +3844,10 @@ figcaption {
 }
 
 .about-heading {
-  margin-top: 5%;
+  margin-top: 6%;
   margin-bottom: 1%;
   font-family: proxima-nova, sans-serif;
+  font-size: 38px;
   font-weight: 700;
   text-align: center;
 }
@@ -3822,7 +3858,14 @@ figcaption {
   text-align: left;
 }
 
+.about-heading.two {
+  margin-top: 0%;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .about-tag {
+  margin-top: 1%;
   font-family: freight-big-pro, sans-serif;
   font-weight: 300;
   text-align: center;
@@ -3847,6 +3890,10 @@ figcaption {
   right: 0px;
   bottom: 30%;
   color: #000;
+}
+
+.link-block-13.w--current {
+  display: none;
 }
 
 .div-block-76 {
@@ -4033,6 +4080,84 @@ figcaption {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
+}
+
+.second-highlight {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.text-span-4 {
+  font-weight: 400;
+}
+
+.text-span-5 {
+  font-weight: 400;
+}
+
+.div-block-84 {
+  text-align: center;
+}
+
+.bold-title {
+  display: inline-block;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.video {
+  max-width: 60%;
+  margin-top: 3%;
+}
+
+.div-block-85 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.div-block-86 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.text-block-27 {
+  margin-bottom: 3%;
+  padding-left: 15%;
+  font-family: proxima-nova, sans-serif;
+  font-weight: 300;
+  text-align: left;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
