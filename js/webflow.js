@@ -2954,6 +2954,10 @@ var easings = Object.freeze({
 	  var position = optimizeFloat(lastPosition + positionDiff * velocity);
 	  var keyframePosition = position * 100;
 
+	  if (position === lastPosition && state.current) {
+	    return state;
+	  }
+
 	  var fromActionItem = void 0;
 	  var toActionItem = void 0;
 	  var positionOffset = void 0;
@@ -13155,5 +13159,6 @@ Webflow.require('ix').init([
   {"slug":"new-interaction-2","name":"New Interaction 2","value":{"style":{},"triggers":[{"type":"navbar","stepsA":[],"stepsB":[]}]}},
   {"slug":"button-deselect-experimental","name":"button deselect experimental","value":{"style":{},"triggers":[{"type":"click","selector":".linkedinimg","stepsA":[{"opacity":0.3,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]},{"type":"click","selector":".lumidimg","stepsA":[{"opacity":0.5,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}},
   {"slug":"bounce-upward","name":"bounce upward","value":{"style":{},"triggers":[{"type":"load","loopA":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"-8px","z":"0px"},{"wait":"500ms","transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
-  {"slug":"on-hover-rotate","name":"on hover rotate ","value":{"style":{},"triggers":[{"type":"hover","loopA":true,"loopB":true,"stepsA":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"360deg"}],"stepsB":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}}
+  {"slug":"on-hover-rotate","name":"on hover rotate ","value":{"style":{},"triggers":[{"type":"hover","loopA":true,"loopB":true,"stepsA":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"360deg"}],"stepsB":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}},
+  {"slug":"home-arrow","name":"home arrow","value":{"style":{},"triggers":[{"type":"hover","selector":".text-block-31","loopB":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"10px","z":"0px"}],"stepsB":[{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"}]},{"type":"hover","selector":".image-53","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}}
 ]);
