@@ -2607,8 +2607,8 @@ figcaption {
 
 .sell-block {
   display: block;
-  margin-top: 10%;
-  margin-bottom: 7%;
+  margin-top: 15%;
+  margin-bottom: 15%;
   padding-right: 10%;
   padding-left: 10%;
 }
@@ -5199,7 +5199,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-left: 10%;
   }
   .image-21 {
-    display: none;
+    display: block;
+    padding-right: 3%;
+    padding-left: 3%;
   }
   .div-block-32 {
     padding-right: 10%;
@@ -5236,6 +5238,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-right: 10%;
     padding-left: 10%;
   }
+  .section-title {
+    font-size: 23px;
+  }
   .button-3 {
     margin-top: 5%;
     margin-bottom: 10%;
@@ -5249,11 +5254,17 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     top: 0px;
     right: 0px;
   }
+  .nav.w--current {
+    box-shadow: 0 0 6px 3px #fff;
+  }
   .about-heading {
-    font-size: 25px;
+    font-size: 23px;
   }
   .about-heading.two {
     font-size: 14px;
+  }
+  .about-heading.about {
+    padding-left: 10%;
   }
   .about-tag {
     margin-bottom: 5%;
@@ -5282,7 +5293,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-left: 10%;
   }
   .nav-menu-8 {
-    position: fixed;
+    position: absolute;
     left: 0px;
     top: 0px;
     right: 0px;
@@ -5293,6 +5304,14 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .column-16 {
     padding-left: 0px;
+  }
+  .div-block-109 {
+    position: absolute;
+    margin-top: 0%;
+  }
+  .about-tagline {
+    margin-right: 2%;
+    font-size: 14px;
   }
 }
 
