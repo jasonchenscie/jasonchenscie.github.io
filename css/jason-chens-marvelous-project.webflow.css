@@ -1930,7 +1930,7 @@ figcaption {
 .div-block-17 {
   position: absolute;
   left: 0px;
-  top: 30%;
+  top: 27%;
   right: 0px;
   display: -webkit-box;
   display: -webkit-flex;
@@ -3778,6 +3778,7 @@ figcaption {
   left: 0px;
   top: 0px;
   right: 0px;
+  display: none;
   padding-right: 2%;
   background-color: #fff;
 }
@@ -4683,7 +4684,7 @@ figcaption {
 .div-block-109 {
   position: absolute;
   left: 0px;
-  top: 10%;
+  top: 7%;
   right: 0px;
 }
 
@@ -4802,7 +4803,7 @@ figcaption {
   position: absolute;
   left: 0px;
   right: 0px;
-  bottom: 10%;
+  bottom: 13%;
   text-align: center;
 }
 
@@ -4818,6 +4819,160 @@ figcaption {
   font-family: proxima-nova, sans-serif;
   font-size: 15px;
   font-weight: 300;
+}
+
+.top-bubble {
+  position: absolute;
+  left: 0px;
+  top: 18px;
+  right: 0px;
+  width: 40px;
+  height: 3px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50px;
+  background-color: #000;
+}
+
+.middle-bubble {
+  position: absolute;
+  left: 0px;
+  top: 28px;
+  right: 0px;
+  width: 40px;
+  height: 3px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50px;
+  background-color: #000;
+}
+
+.bottom-bubble {
+  position: absolute;
+  left: 0px;
+  top: 38px;
+  right: 0px;
+  width: 40px;
+  height: 3px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50px;
+  background-color: #000;
+}
+
+.menu-button-3 {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  width: 60px;
+  height: 60px;
+  padding: 0px;
+  border: 1px none #000;
+  border-radius: 75px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.menu-button-3.w--open {
+  background-color: transparent;
+}
+
+.nav-menu-9 {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding-top: 15%;
+  padding-bottom: auto;
+  background-color: #fff;
+}
+
+.nav-link-bubble {
+  width: 50%;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 55px;
+  background-color: #000;
+  -webkit-transition: color 200ms ease, padding 350ms ease;
+  transition: color 200ms ease, padding 350ms ease;
+  font-family: paralucent, sans-serif;
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+
+.nav-link-bubble:hover {
+  padding-left: 30px;
+}
+
+.nav-link-bubble.w--current {
+  font-family: paralucent, sans-serif;
+  color: #e94d4d;
+  font-size: 30px;
+}
+
+.navbar-7 {
+  padding-top: 5%;
+  background-color: transparent;
+}
+
+.container-12 {
+  position: fixed;
+  left: 3%;
+  top: 4px;
+  right: 3%;
+  z-index: 3000;
+  margin-right: 0%;
+  margin-left: 0%;
+  background-color: transparent;
+}
+
+.div-block-118 {
+  position: fixed;
+  left: 0px;
+  top: 1%;
+  right: 3%;
+  z-index: 3333;
+}
+
+.button-5 {
+  margin-left: 0%;
+  border: 1px solid #000;
+  background-color: #fff;
+  font-family: proxima-nova, sans-serif;
+  color: #000;
+  font-weight: 300;
+}
+
+.button-5:hover {
+  background-color: hsla(0, 0%, 66%, .5);
+}
+
+.button-6 {
+  margin-left: 2%;
+  border: 1px solid #000;
+  background-color: #fff;
+  font-family: proxima-nova, sans-serif;
+  color: #000;
+  font-weight: 300;
+}
+
+.button-6:hover {
+  background-color: hsla(0, 0%, 66%, .5);
+}
+
+.div-block-119 {
+  padding-left: 25%;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -4961,6 +5116,10 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     margin-right: 5%;
     margin-left: 0%;
   }
+  .about-text {
+    padding-right: 15%;
+    padding-left: 15%;
+  }
   .paragraph-11 {
     padding-right: 5%;
     padding-left: 5%;
@@ -5005,9 +5164,15 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .nav.w--current {
     font-size: 18px;
   }
+  .about-heading.about {
+    padding-left: 15%;
+  }
   .div-block-81 {
     padding-right: 5%;
     padding-left: 5%;
+  }
+  .div-block-82 {
+    padding-left: 15%;
   }
   .nav-menu-8 {
     position: fixed;
@@ -5017,6 +5182,49 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .column-14 {
     padding-right: 10px;
+  }
+  .top-bubble {
+    left: 0px;
+    border-radius: 50px;
+  }
+  .middle-bubble {
+    border-radius: 50px;
+  }
+  .bottom-bubble {
+    border-radius: 50px;
+  }
+  .menu-button-3 {
+    position: relative;
+    padding: 0px;
+  }
+  .nav-menu-9 {
+    top: 90px;
+    padding-top: 25%;
+  }
+  .nav-link-12 {
+    width: 100%;
+  }
+  .nav-link-bubble {
+    width: 100%;
+    border: 1px none #000;
+    border-radius: 55px;
+    background-color: transparent;
+    color: #000;
+  }
+  .nav-link-bubble.w--current {
+    background-color: transparent;
+    color: #000;
+  }
+  .navbar-7 {
+    background-color: transparent;
+  }
+  .container-12 {
+    margin-right: 0px;
+    margin-left: 0px;
+  }
+  .div-block-119 {
+    margin-top: 4%;
+    padding-left: 15%;
   }
 }
 
@@ -5124,6 +5332,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .sell-title {
     font-size: 30px;
   }
+  .about-heading.about {
+    padding-left: 10%;
+  }
   .div-block-81 {
     padding-right: 5%;
     padding-left: 5%;
@@ -5139,6 +5350,10 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     top: 0px;
     right: 0px;
   }
+  .div-block-119 {
+    margin-top: 4%;
+    padding-left: 10%;
+  }
 }
 
 @media (max-width: 479px) {
@@ -5151,6 +5366,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .slide {
     padding-right: 53px;
     padding-left: 53px;
+  }
+  .footer.accent {
+    font-size: 12px;
   }
   .grid-fours {
     width: 50%;
@@ -5197,9 +5415,19 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .about-text {
     padding-right: 10%;
     padding-left: 10%;
+    font-size: 12px;
+  }
+  .div-block-17 {
+    top: 25%;
+  }
+  .div-block-30 {
+    display: block;
   }
   .image-21 {
     display: block;
+    max-width: 85%;
+    margin-right: auto;
+    margin-left: auto;
     padding-right: 3%;
     padding-left: 3%;
   }
@@ -5218,6 +5446,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     font-size: 8px;
     text-align: center;
   }
+  .sell-title {
+    font-size: 24px;
+  }
   .sell-block {
     margin-top: 20%;
     padding-right: 5%;
@@ -5228,18 +5459,30 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     margin-bottom: 8%;
     font-size: 15px;
   }
+  .sell-bold {
+    font-size: 12px;
+  }
   .sell-title-2 {
     font-size: 25px;
   }
   .sell-tag-2 {
     font-size: 12px;
   }
+  .sell-des {
+    font-size: 12px;
+  }
+  .sell-des-2 {
+    font-size: 16px;
+  }
   .overview {
     padding-right: 10%;
     padding-left: 10%;
   }
   .section-title {
-    font-size: 23px;
+    font-size: 24px;
+  }
+  .section-tag {
+    font-size: 12px;
   }
   .button-3 {
     margin-top: 5%;
@@ -5247,6 +5490,27 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .spec {
     margin-bottom: 15%;
+  }
+  .column-13 {
+    text-align: center;
+  }
+  .heading-13 {
+    margin-bottom: 0%;
+    font-size: 20px;
+    text-align: left;
+  }
+  .paragraph-15 {
+    padding-top: 0px;
+    font-size: 10px;
+  }
+  .div-block-72 {
+    display: none;
+    opacity: 1;
+  }
+  .text-block-21 {
+    margin-bottom: 5%;
+    font-size: 10px;
+    text-align: left;
   }
   .navbar-6 {
     position: static;
@@ -5258,17 +5522,21 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     box-shadow: 0 0 6px 3px #fff;
   }
   .about-heading {
-    font-size: 23px;
+    margin-bottom: 0%;
+    font-size: 24px;
   }
   .about-heading.two {
     font-size: 14px;
   }
   .about-heading.about {
+    display: block;
+    padding-right: 0%;
     padding-left: 10%;
+    text-align: left;
   }
   .about-tag {
     margin-bottom: 5%;
-    font-size: 12px;
+    font-size: 10px;
   }
   .link-block-13.w--current {
     display: none;
@@ -5288,6 +5556,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-right: 5%;
     padding-left: 5%;
   }
+  .text-block-25 {
+    font-size: 12px;
+  }
   .div-block-82 {
     margin-top: 12%;
     padding-left: 10%;
@@ -5305,13 +5576,72 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .column-16 {
     padding-left: 0px;
   }
+  .second-highlight {
+    font-family: proxima-nova, sans-serif;
+    font-size: 12px;
+  }
+  .paragraph-16 {
+    padding-right: 1%;
+    padding-left: 1%;
+    font-size: 12px;
+  }
+  .tag {
+    font-size: 12px;
+  }
+  .div-block-106.coloraway {
+    margin-top: 20%;
+  }
+  .text-block-29 {
+    font-size: 12px;
+  }
+  .bold-text {
+    font-size: 12px;
+  }
   .div-block-109 {
     position: absolute;
+    top: 15%;
     margin-top: 0%;
   }
   .about-tagline {
     margin-right: 2%;
     font-size: 14px;
+  }
+  .paragraph-17 {
+    font-size: 12px;
+  }
+  .div-block-117 {
+    display: block;
+  }
+  .text-block-31 {
+    font-size: 15px;
+  }
+  .menu-button-3 {
+    z-index: 33333;
+  }
+  .nav-menu-9 {
+    padding-top: 50%;
+  }
+  .container-12 {
+    position: static;
+  }
+  .div-block-118 {
+    position: relative;
+  }
+  .column-20 {
+    text-align: center;
+  }
+  .column-21 {
+    text-align: center;
+  }
+  .button-5 {
+    font-size: 12px;
+  }
+  .button-6 {
+    margin-left: 4%;
+    font-size: 12px;
+  }
+  .div-block-119 {
+    margin-top: 5%;
   }
 }
 
