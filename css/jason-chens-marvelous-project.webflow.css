@@ -4940,7 +4940,7 @@ figcaption {
 .div-block-118 {
   position: fixed;
   left: 0px;
-  top: 1%;
+  top: 3%;
   right: 3%;
   z-index: 3333;
 }
@@ -4972,6 +4972,7 @@ figcaption {
 }
 
 .div-block-119 {
+  margin-top: 2%;
   padding-left: 25%;
 }
 
