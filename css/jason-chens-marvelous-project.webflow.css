@@ -3744,7 +3744,7 @@ figcaption {
 .heading-13 {
   position: static;
   margin-top: 0px;
-  margin-bottom: 2%;
+  margin-bottom: 3%;
   font-family: paralucent, sans-serif;
   font-weight: 700;
 }
@@ -3752,6 +3752,7 @@ figcaption {
 .paragraph-15 {
   position: static;
   opacity: 1;
+  font-size: 16px;
   font-weight: 300;
 }
 
@@ -3759,7 +3760,7 @@ figcaption {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding-top: 15%;
+  padding-top: 18%;
   padding-right: 10%;
   padding-left: 10%;
   background-color: hsla(0, 0%, 100%, .95);
@@ -3778,7 +3779,7 @@ figcaption {
   left: 0px;
   top: 0px;
   right: 0px;
-  display: none;
+  display: block;
   padding-right: 2%;
   background-color: #fff;
 }
@@ -4357,7 +4358,7 @@ figcaption {
 }
 
 .tag {
-  margin-top: 3%;
+  margin-top: 1%;
   margin-bottom: 4%;
   font-family: proxima-nova, sans-serif;
   font-size: 14px;
@@ -4803,7 +4804,7 @@ figcaption {
   position: absolute;
   left: 0px;
   right: 0px;
-  bottom: 13%;
+  bottom: 10%;
   text-align: center;
 }
 
@@ -4812,12 +4813,12 @@ figcaption {
 }
 
 .image-53 {
-  max-width: 25%;
+  max-width: 20%;
 }
 
 .text-block-31 {
   font-family: proxima-nova, sans-serif;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 300;
 }
 
@@ -4922,6 +4923,7 @@ figcaption {
 }
 
 .navbar-7 {
+  display: none;
   padding-top: 5%;
   background-color: transparent;
 }
@@ -4939,7 +4941,7 @@ figcaption {
 
 .div-block-118 {
   position: fixed;
-  left: 0px;
+  left: 3%;
   top: 3%;
   right: 3%;
   z-index: 3333;
@@ -4947,7 +4949,7 @@ figcaption {
 
 .button-5 {
   margin-left: 0%;
-  border: 1px solid #000;
+  border: 2px solid #000;
   background-color: #fff;
   font-family: proxima-nova, sans-serif;
   color: #000;
@@ -4960,7 +4962,7 @@ figcaption {
 
 .button-6 {
   margin-left: 2%;
-  border: 1px solid #000;
+  border: 2px solid #000;
   background-color: #fff;
   font-family: proxima-nova, sans-serif;
   color: #000;
@@ -4974,6 +4976,53 @@ figcaption {
 .div-block-119 {
   margin-top: 2%;
   padding-left: 25%;
+}
+
+.image-54 {
+  max-width: 70%;
+  margin-top: 5%;
+}
+
+.text-block-32 {
+  position: absolute;
+  left: 3%;
+  top: 0px;
+  bottom: 0px;
+  margin-right: auto;
+  margin-left: auto;
+  font-family: paralucent, sans-serif;
+  font-size: 25px;
+  line-height: 25px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.image-55 {
+  max-width: 30%;
+  margin-bottom: 2%;
+}
+
+.image-56 {
+  margin-right: 3%;
+}
+
+.div-block-120 {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.image-57 {
+  max-width: 60%;
+}
+
+.image-58 {
+  max-width: 30%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.image-59 {
+  max-width: 80%;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -5159,14 +5208,23 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .paragraph-15 {
     position: absolute;
   }
+  .navbar-6 {
+    display: none;
+  }
   .nav {
     font-size: 18px;
   }
   .nav.w--current {
     font-size: 18px;
   }
+  .about-heading {
+    font-size: 38px;
+  }
   .about-heading.about {
     padding-left: 15%;
+  }
+  .about-tag {
+    font-size: 14px;
   }
   .div-block-81 {
     padding-right: 5%;
@@ -5183,6 +5241,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .column-14 {
     padding-right: 10px;
+  }
+  .text-block-31 {
+    font-size: 14px;
   }
   .top-bubble {
     left: 0px;
@@ -5217,6 +5278,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     color: #000;
   }
   .navbar-7 {
+    display: block;
     background-color: transparent;
   }
   .container-12 {
@@ -5331,10 +5393,28 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-left: 5%;
   }
   .sell-title {
+    font-size: 25px;
+  }
+  .sell-tag-2 {
+    font-size: 16px;
+  }
+  .sell-des-2 {
+    font-size: 14px;
+  }
+  .section-title {
+    font-size: 25px;
+  }
+  .navbar-6 {
+    display: none;
+  }
+  .about-heading {
     font-size: 30px;
   }
   .about-heading.about {
     padding-left: 10%;
+  }
+  .about-tag {
+    font-size: 14px;
   }
   .div-block-81 {
     padding-right: 5%;
@@ -5350,6 +5430,21 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     left: 0px;
     top: 0px;
     right: 0px;
+  }
+  .second-highlight {
+    font-size: 14px;
+  }
+  .about-tagline {
+    font-size: 16px;
+  }
+  .div-block-111 {
+    margin-top: 10%;
+  }
+  .div-block-117 {
+    display: none;
+  }
+  .navbar-7 {
+    display: block;
   }
   .div-block-119 {
     margin-top: 4%;
@@ -5610,8 +5705,11 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .paragraph-17 {
     font-size: 12px;
   }
+  .image-52 {
+    max-width: 90%;
+  }
   .div-block-117 {
-    display: block;
+    display: none;
   }
   .text-block-31 {
     font-size: 15px;
@@ -5627,6 +5725,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .div-block-118 {
     position: relative;
+    right: 3%;
   }
   .column-20 {
     text-align: center;
