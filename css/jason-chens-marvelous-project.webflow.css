@@ -3954,6 +3954,10 @@ figcaption {
   text-align: left;
 }
 
+.about-heading.work {
+  margin-bottom: 3%;
+}
+
 .about-tag {
   margin-top: 1%;
   font-family: proxima-nova, sans-serif;
@@ -4181,6 +4185,7 @@ figcaption {
 }
 
 .second-highlight {
+  font-family: proxima-nova, sans-serif;
   color: #000;
   font-size: 16px;
   font-weight: 500;
@@ -4904,9 +4909,8 @@ figcaption {
   margin-right: auto;
   margin-left: auto;
   padding: auto;
+  border-right: 1px none #fff;
   background-color: #000;
-  -webkit-transition: color 200ms ease, padding 350ms ease;
-  transition: color 200ms ease, padding 350ms ease;
   font-family: paralucent, sans-serif;
   color: #fff;
   font-size: 14px;
@@ -4914,12 +4918,14 @@ figcaption {
 }
 
 .nav-link-bubble:hover {
-  padding-left: 30px;
+  padding-left: auto;
 }
 
 .nav-link-bubble.w--current {
   margin-top: 0px;
   padding: auto;
+  -webkit-transition-property: none;
+  transition-property: none;
   font-family: paralucent, sans-serif;
   color: #e94d4d;
   font-size: 14px;
@@ -5259,10 +5265,16 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .menu-button-3 {
     position: relative;
+    z-index: 33333;
     padding: 0px;
   }
   .nav-menu-9 {
-    top: 90px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    right: 0px;
+    width: 100%;
+    height: 100%;
     padding-top: 25%;
   }
   .nav-link-12 {
@@ -5274,10 +5286,12 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     border-radius: 55px;
     background-color: transparent;
     color: #000;
+    font-size: 30px;
   }
   .nav-link-bubble.w--current {
     background-color: transparent;
     color: #000;
+    font-size: 30px;
   }
   .navbar-7 {
     display: block;
@@ -5715,6 +5729,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     max-width: 90%;
   }
   .div-block-117 {
+    bottom: 25%;
     display: none;
   }
   .text-block-31 {
