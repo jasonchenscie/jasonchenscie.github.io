@@ -10727,6 +10727,7 @@ var elementApi = Object.freeze({
 	    var isMouseOut = nativeEvent.type === 'mouseout';
 	    var value = restingState / 100;
 	    var namespacedParameterId = continuousParameterGroupId;
+	    var elementHovered = false;
 
 	    switch (basedOn) {
 	      case VIEWPORT:
@@ -10782,14 +10783,21 @@ var elementApi = Object.freeze({
 	            break;
 	          }
 
+	          elementHovered = true;
+
 	          value = isXAxis ? (clientX - left) / width : (clientY - top) / height;
 	          break;
 	        }
 	    }
-	    value = reverse ? 1 - value : value;
-	    store.dispatch(parameterChanged(namespacedParameterId, value));
+
+	    // Only update based on element if the mouse is moving over or has just left the element
+	    if (basedOn !== ELEMENT || elementHovered || elementHovered !== state.elementHovered) {
+	      value = reverse ? 1 - value : value;
+	      store.dispatch(parameterChanged(namespacedParameterId, value));
+	    }
 
 	    return {
+	      elementHovered: elementHovered,
 	      clientX: clientX,
 	      clientY: clientY,
 	      pageX: pageX,
@@ -10820,6 +10828,7 @@ var elementApi = Object.freeze({
 	        store = _ref9.store,
 	        eventConfig = _ref9.eventConfig,
 	        event = _ref9.event;
+	    var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { scrollPercent: 0 };
 
 	    var _getDocumentState6 = getDocumentState(),
 	        scrollLeft = _getDocumentState6.scrollLeft,
@@ -10849,7 +10858,12 @@ var elementApi = Object.freeze({
 
 	    if (basedOn === VIEWPORT) {
 	      var value = isXAxis ? scrollLeft / viewportWidth : scrollTop / viewportHeight;
-	      store.dispatch(parameterChanged(continuousParameterGroupId, value));
+	      if (value !== state.scrollPercent) {
+	        store.dispatch(parameterChanged(continuousParameterGroupId, value));
+	      }
+	      return {
+	        scrollPercent: value
+	      };
 	    } else {
 	      var namespacedParameterId = getNamespacedParameterId(event.id, continuousParameterGroupId);
 	      var elementRect = element.getBoundingClientRect();
@@ -10869,7 +10883,12 @@ var elementApi = Object.freeze({
 	      var fixedScrollTop = Math.min(Math.max(0, visibleHeight - offsetElementTop), fixedScrollHeight);
 	      var fixedScrollPerc = fixedScrollTop / fixedScrollHeight;
 
-	      store.dispatch(parameterChanged(namespacedParameterId, fixedScrollPerc));
+	      if (fixedScrollPerc !== state.scrollPercent) {
+	        store.dispatch(parameterChanged(namespacedParameterId, fixedScrollPerc));
+	      }
+	      return {
+	        scrollPercent: fixedScrollPerc
+	      };
 	    }
 	  }
 	}), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, SCROLL_INTO_VIEW, scrollIntoOutOfViewOptions), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, SCROLL_OUT_OF_VIEW, scrollIntoOutOfViewOptions), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, PAGE_SCROLL_DOWN, babelHelpers.extends({}, baseScrollActionGroupOptions, {
@@ -11193,6 +11212,15 @@ var elementApi = Object.freeze({
 	  return omitBy$1(mapValues$1(object, iteratee), isEmpty$1);
 	};
 
+	var forEachEventTarget = function forEachEventTarget(eventTargets, eventCallback) {
+	  forEach$1(eventTargets, function (elements, eventId) {
+	    elements.forEach(function (element, index) {
+	      var eventStateKey = eventId + ':' + index;
+	      eventCallback(element, eventId, eventStateKey);
+	    });
+	  });
+	};
+
 	var getAffectedForEvent = function getAffectedForEvent(event) {
 	  var config = { target: event.target };
 	  return getAffectedElements({ config: config, elementApi: elementApi });
@@ -11262,10 +11290,9 @@ var elementApi = Object.freeze({
 	    var _store$getState9 = store.getState(),
 	        ixSession = _store$getState9.ixSession;
 
-	    forEach$1(eventTargets, function (elements, key) {
-	      var element = elements[0];
-	      var event = events[key];
-	      var oldState = ixSession.eventState[key];
+	    forEachEventTarget(eventTargets, function (element, eventId, eventStateKey) {
+	      var event = events[eventId];
+	      var oldState = ixSession.eventState[eventStateKey];
 	      var eventAction = event.action,
 	          _event$mediaQueries = event.mediaQueries,
 	          mediaQueries = _event$mediaQueries === undefined ? ixData.mediaQueryKeys : _event$mediaQueries;
@@ -11285,7 +11312,7 @@ var elementApi = Object.freeze({
 	          nativeEvent: nativeEvent
 	        }, oldState);
 	        if (newState !== oldState) {
-	          store.dispatch(eventStateChanged(key, newState));
+	          store.dispatch(eventStateChanged(eventStateKey, newState));
 	        }
 	      };
 	      if (eventAction.actionTypeId === GENERAL_CONTINUOUS_ACTION) {
