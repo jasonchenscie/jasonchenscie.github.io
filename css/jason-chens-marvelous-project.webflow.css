@@ -2596,7 +2596,7 @@ figcaption {
 
 .sell-title {
   margin-bottom: 1%;
-  padding-left: 15%;
+  padding-left: 20%;
   font-family: paralucent, sans-serif;
   font-size: 30px;
   font-weight: 900;
@@ -2654,8 +2654,8 @@ figcaption {
 .sell-tag {
   margin-top: 5px;
   margin-bottom: 2%;
-  padding-right: 15%;
-  padding-left: 15%;
+  padding-right: 20%;
+  padding-left: 20%;
   font-family: proxima-nova, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -2812,8 +2812,8 @@ figcaption {
   display: block;
   margin-top: 5px;
   margin-bottom: 3%;
-  padding-right: 15%;
-  padding-left: 15%;
+  padding-right: 20%;
+  padding-left: 20%;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
@@ -2840,8 +2840,8 @@ figcaption {
 
 .sell-des {
   margin-bottom: 3%;
-  padding-right: 15%;
-  padding-left: 15%;
+  padding-right: 20%;
+  padding-left: 20%;
   font-family: proxima-nova, sans-serif;
   font-size: 16px;
   font-weight: 300;
@@ -5086,7 +5086,7 @@ figcaption {
 
 .top-section-left {
   padding-right: 7%;
-  padding-left: 5%;
+  padding-left: 7%;
 }
 
 .top-section-right {
@@ -5280,9 +5280,9 @@ html.w-mod-js *[data-ix="fade-in-bottom-scroll-in"] {
 
 html.w-mod-js *[data-ix="bounce-in-scroll-in"] {
   opacity: 0;
-  -webkit-transform: scale(0.6000000000000005, 0.6000000000000005);
-  -ms-transform: scale(0.6000000000000005, 0.6000000000000005);
-  transform: scale(0.6000000000000005, 0.6000000000000005);
+  -webkit-transform: scale(0.6000000000000006, 0.6000000000000006);
+  -ms-transform: scale(0.6000000000000006, 0.6000000000000006);
+  transform: scale(0.6000000000000006, 0.6000000000000006);
 }
 
 html.w-mod-js *[data-ix="scale-on-scroll"] {
@@ -5746,7 +5746,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   .about-text {
     padding-right: 10%;
     padding-left: 10%;
-    font-size: 12px;
+    font-size: 16px;
   }
   .div-block-17 {
     top: 25%;
@@ -5778,16 +5778,19 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     text-align: center;
   }
   .sell-title {
+    padding-left: 10%;
     font-size: 24px;
   }
   .sell-block {
-    margin-top: 20%;
+    margin-top: 10%;
     padding-right: 5%;
     padding-left: 5%;
   }
   .sell-tag {
     margin-top: 3%;
     margin-bottom: 8%;
+    padding-right: 10%;
+    padding-left: 10%;
     font-size: 15px;
   }
   .sell-bold {
@@ -5797,15 +5800,18 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     font-size: 25px;
   }
   .sell-tag-2 {
-    font-size: 12px;
+    font-size: 16px;
   }
   .sell-des {
-    font-size: 12px;
+    padding-right: 10%;
+    padding-left: 10%;
+    font-size: 16px;
   }
   .sell-des-2 {
     font-size: 16px;
   }
   .overview {
+    margin-bottom: 5%;
     padding-right: 10%;
     padding-left: 10%;
   }
@@ -5821,6 +5827,9 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .spec {
     margin-bottom: 15%;
+  }
+  .role-des {
+    margin-bottom: 2%;
   }
   .column-13 {
     text-align: center;
@@ -5888,7 +5897,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-left: 5%;
   }
   .text-block-25 {
-    font-size: 12px;
+    font-size: 16px;
   }
   .div-block-82 {
     margin-top: 12%;
@@ -5909,7 +5918,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
   }
   .second-highlight {
     font-family: proxima-nova, sans-serif;
-    font-size: 12px;
+    font-size: 16px;
   }
   .paragraph-16 {
     padding-right: 1%;
@@ -5942,7 +5951,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     font-size: 14px;
   }
   .paragraph-17 {
-    font-size: 12px;
+    font-size: 16px;
   }
   .image-52 {
     max-width: 90%;
@@ -5984,11 +5993,12 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     margin-top: 5%;
   }
   .roadmap {
-    font-size: 24px;
+    font-size: 16px;
   }
   .tertiary-highlight {
+    margin-bottom: 2%;
     font-family: proxima-nova, sans-serif;
-    font-size: 12px;
+    font-size: 16px;
   }
   .roadmap-secondary {
     font-size: 24px;

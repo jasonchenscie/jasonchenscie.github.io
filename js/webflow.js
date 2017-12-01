@@ -8399,6 +8399,7 @@ var easings = Object.freeze({
 	var DISPLAY = 'display';
 	var FLEX = 'flex';
 	var WILL_CHANGE = 'willChange';
+	var AUTO = 'AUTO';
 	var COMMA_DELIMITER = ',';
 
 	var IS_BROWSER_ENV = typeof window !== 'undefined';
@@ -8653,6 +8654,8 @@ var easings = Object.freeze({
 	  }
 	}
 
+	var pxValueRegex = /px/;
+
 	function getInstanceOrigin(_ref5) {
 	  var element = _ref5.element,
 	      actionItem = _ref5.actionItem,
@@ -8660,7 +8663,8 @@ var easings = Object.freeze({
 	      computedStyle = _ref5$computedStyle === undefined ? {} : _ref5$computedStyle,
 	      elementApi = _ref5.elementApi;
 	  var getStyle = elementApi.getStyle;
-	  var actionTypeId = actionItem.actionTypeId;
+	  var actionTypeId = actionItem.actionTypeId,
+	      config = actionItem.config;
 
 	  switch (actionTypeId) {
 	    case TRANSFORM_MOVE:
@@ -8671,10 +8675,27 @@ var easings = Object.freeze({
 	    case STYLE_OPACITY:
 	      return { value: defaultTo$1(parseFloat(getStyle(element, OPACITY)), 1.0) };
 	    case STYLE_SIZE:
-	      return {
-	        widthValue: defaultTo$1(parseFloat(getStyle(element, WIDTH)), parseFloat(computedStyle.width)),
-	        heightValue: defaultTo$1(parseFloat(getStyle(element, HEIGHT)), parseFloat(computedStyle.height))
-	      };
+	      {
+	        var inlineWidth = getStyle(element, WIDTH);
+	        var inlineHeight = getStyle(element, HEIGHT);
+	        var widthValue = void 0;
+	        var heightValue = void 0;
+	        // When destination unit is 'AUTO', ensure origin values are in px
+	        if (config.widthUnit === AUTO) {
+	          widthValue = pxValueRegex.test(inlineWidth) ? parseFloat(inlineWidth) : parseFloat(computedStyle.width);
+	        } else {
+	          widthValue = defaultTo$1(parseFloat(inlineWidth), parseFloat(computedStyle.width));
+	        }
+	        if (config.heightUnit === AUTO) {
+	          heightValue = pxValueRegex.test(inlineHeight) ? parseFloat(inlineHeight) : parseFloat(computedStyle.height);
+	        } else {
+	          heightValue = defaultTo$1(parseFloat(inlineHeight), parseFloat(computedStyle.height));
+	        }
+	        return {
+	          widthValue: widthValue,
+	          heightValue: heightValue
+	        };
+	      }
 	    case STYLE_BACKGROUND_COLOR:
 	    case STYLE_BORDER:
 	    case STYLE_TEXT_COLOR:
@@ -8686,7 +8707,11 @@ var easings = Object.freeze({
 	  }
 	}
 
-	function getDestinationValues(actionItem) {
+	function getDestinationValues(_ref6) {
+	  var element = _ref6.element,
+	      actionItem = _ref6.actionItem,
+	      elementApi = _ref6.elementApi;
+
 	  switch (actionItem.actionTypeId) {
 	    case TRANSFORM_MOVE:
 	    case TRANSFORM_SCALE:
@@ -8702,21 +8727,42 @@ var easings = Object.freeze({
 	      }
 	    case STYLE_SIZE:
 	      {
+	        var getStyle = elementApi.getStyle,
+	            setStyle = elementApi.setStyle,
+	            getProperty = elementApi.getProperty;
 	        var _actionItem$config2 = actionItem.config,
-	            widthValue = _actionItem$config2.widthValue,
-	            heightValue = _actionItem$config2.heightValue;
+	            widthUnit = _actionItem$config2.widthUnit,
+	            heightUnit = _actionItem$config2.heightUnit;
+	        var _actionItem$config3 = actionItem.config,
+	            widthValue = _actionItem$config3.widthValue,
+	            heightValue = _actionItem$config3.heightValue;
 
+	        if (!IS_BROWSER_ENV) {
+	          return { widthValue: widthValue, heightValue: heightValue };
+	        }
+	        if (widthUnit === AUTO) {
+	          var temp = getStyle(element, WIDTH);
+	          setStyle(element, WIDTH, '');
+	          widthValue = getProperty(element, 'offsetWidth');
+	          setStyle(element, WIDTH, temp);
+	        }
+	        if (heightUnit === AUTO) {
+	          var _temp = getStyle(element, HEIGHT);
+	          setStyle(element, HEIGHT, '');
+	          heightValue = getProperty(element, 'offsetHeight');
+	          setStyle(element, HEIGHT, _temp);
+	        }
 	        return { widthValue: widthValue, heightValue: heightValue };
 	      }
 	    case STYLE_BACKGROUND_COLOR:
 	    case STYLE_BORDER:
 	    case STYLE_TEXT_COLOR:
 	      {
-	        var _actionItem$config3 = actionItem.config,
-	            rValue = _actionItem$config3.rValue,
-	            gValue = _actionItem$config3.gValue,
-	            bValue = _actionItem$config3.bValue,
-	            aValue = _actionItem$config3.aValue;
+	        var _actionItem$config4 = actionItem.config,
+	            rValue = _actionItem$config4.rValue,
+	            gValue = _actionItem$config4.gValue,
+	            bValue = _actionItem$config4.bValue,
+	            aValue = _actionItem$config4.aValue;
 
 	        return { rValue: rValue, gValue: gValue, bValue: bValue, aValue: aValue };
 	      }
@@ -8850,10 +8896,10 @@ var easings = Object.freeze({
 	  }
 	}
 
-	function renderTransform(_ref6, elementApi) {
-	  var element = _ref6.element,
-	      current = _ref6.current,
-	      actionItem = _ref6.actionItem;
+	function renderTransform(_ref7, elementApi) {
+	  var element = _ref7.element,
+	      current = _ref7.current,
+	      actionItem = _ref7.actionItem;
 	  var getStyle = elementApi.getStyle,
 	      setStyle = elementApi.setStyle;
 
@@ -8933,11 +8979,11 @@ var easings = Object.freeze({
 	var rgbValidRegex = /^rgb/;
 	var rgbMatchRegex = RegExp('rgba?' + paramCapture);
 
-	function parseColor(_ref7) {
-	  var element = _ref7.element,
-	      actionTypeId = _ref7.actionTypeId,
-	      computedStyle = _ref7.computedStyle,
-	      getStyle = _ref7.getStyle;
+	function parseColor(_ref8) {
+	  var element = _ref8.element,
+	      actionTypeId = _ref8.actionTypeId,
+	      computedStyle = _ref8.computedStyle,
+	      getStyle = _ref8.getStyle;
 
 	  var prop = colorStyleProps[actionTypeId];
 	  var inlineValue = getStyle(element, prop);
@@ -8951,30 +8997,37 @@ var easings = Object.freeze({
 	  };
 	}
 
-	function renderStyle(_ref8, elementApi) {
-	  var element = _ref8.element,
-	      actionItem = _ref8.actionItem,
-	      current = _ref8.current,
-	      styleProp = _ref8.styleProp;
+	function renderStyle(_ref9, elementApi) {
+	  var element = _ref9.element,
+	      actionItem = _ref9.actionItem,
+	      current = _ref9.current,
+	      styleProp = _ref9.styleProp;
 	  var setStyle = elementApi.setStyle;
-	  var actionTypeId = actionItem.actionTypeId;
+	  var actionTypeId = actionItem.actionTypeId,
+	      config = actionItem.config;
 
 	  switch (actionTypeId) {
 	    case STYLE_SIZE:
 	      {
-	        var _actionItem$config4 = actionItem.config,
-	            _actionItem$config4$w = _actionItem$config4.widthUnit,
-	            widthUnit = _actionItem$config4$w === undefined ? '' : _actionItem$config4$w,
-	            _actionItem$config4$h = _actionItem$config4.heightUnit,
-	            heightUnit = _actionItem$config4$h === undefined ? '' : _actionItem$config4$h;
+	        var _actionItem$config5 = actionItem.config,
+	            _actionItem$config5$w = _actionItem$config5.widthUnit,
+	            widthUnit = _actionItem$config5$w === undefined ? '' : _actionItem$config5$w,
+	            _actionItem$config5$h = _actionItem$config5.heightUnit,
+	            heightUnit = _actionItem$config5$h === undefined ? '' : _actionItem$config5$h;
 	        var widthValue = current.widthValue,
 	            heightValue = current.heightValue;
 
 	        if (widthValue !== undefined) {
+	          if (widthUnit === AUTO) {
+	            widthUnit = 'px';
+	          }
 	          addWillChange(element, WIDTH, elementApi);
 	          setStyle(element, WIDTH, widthValue + widthUnit);
 	        }
 	        if (heightValue !== undefined) {
+	          if (heightUnit === AUTO) {
+	            heightUnit = 'px';
+	          }
 	          addWillChange(element, HEIGHT, elementApi);
 	          setStyle(element, HEIGHT, heightValue + heightUnit);
 	        }
@@ -8996,8 +9049,8 @@ var easings = Object.freeze({
 	      }
 	    default:
 	      {
-	        var _actionItem$config$un = actionItem.config.unit,
-	            unit = _actionItem$config$un === undefined ? '' : _actionItem$config$un;
+	        var _config$unit = config.unit,
+	            unit = _config$unit === undefined ? '' : _config$unit;
 
 	        addWillChange(element, styleProp, elementApi);
 	        setStyle(element, styleProp, current.value + unit);
@@ -9006,9 +9059,9 @@ var easings = Object.freeze({
 	  }
 	}
 
-	function renderGeneral(_ref9, elementApi) {
-	  var element = _ref9.element,
-	      actionItem = _ref9.actionItem;
+	function renderGeneral(_ref10, elementApi) {
+	  var element = _ref10.element,
+	      actionItem = _ref10.actionItem;
 	  var setStyle = elementApi.setStyle;
 
 	  switch (actionItem.actionTypeId) {
@@ -9068,9 +9121,9 @@ var easings = Object.freeze({
 	  }).join(COMMA_DELIMITER));
 	}
 
-	function clearAllStyles(_ref10) {
-	  var store = _ref10.store,
-	      elementApi = _ref10.elementApi;
+	function clearAllStyles(_ref11) {
+	  var store = _ref11.store,
+	      elementApi = _ref11.elementApi;
 
 	  var _store$getState = store.getState(),
 	      ixData = _store$getState.ixData;
@@ -9095,11 +9148,11 @@ var easings = Object.freeze({
 	  });
 	}
 
-	function clearActionListStyles(_ref11) {
-	  var _ref11$actionList = _ref11.actionList,
-	      actionList = _ref11$actionList === undefined ? {} : _ref11$actionList,
-	      event = _ref11.event,
-	      elementApi = _ref11.elementApi;
+	function clearActionListStyles(_ref12) {
+	  var _ref12$actionList = _ref12.actionList,
+	      actionList = _ref12$actionList === undefined ? {} : _ref12$actionList,
+	      event = _ref12.event,
+	      elementApi = _ref12.elementApi;
 	  var actionItemGroups = actionList.actionItemGroups,
 	      continuousParameterGroups = actionList.continuousParameterGroups;
 
@@ -9115,15 +9168,15 @@ var easings = Object.freeze({
 	  });
 	}
 
-	function clearActionGroupStyles(_ref12) {
-	  var actionGroup = _ref12.actionGroup,
-	      event = _ref12.event,
-	      elementApi = _ref12.elementApi;
+	function clearActionGroupStyles(_ref13) {
+	  var actionGroup = _ref13.actionGroup,
+	      event = _ref13.event,
+	      elementApi = _ref13.elementApi;
 	  var actionItems = actionGroup.actionItems;
 
-	  actionItems.forEach(function (_ref13) {
-	    var actionTypeId = _ref13.actionTypeId,
-	        config = _ref13.config;
+	  actionItems.forEach(function (_ref14) {
+	    var actionTypeId = _ref14.actionTypeId,
+	        config = _ref14.config;
 
 	    var clearElement = processElementByType({ effect: clearStyleProp, actionTypeId: actionTypeId, elementApi: elementApi });
 	    getAffectedElements({ config: config, event: event, elementApi: elementApi }).forEach(clearElement);
@@ -9133,20 +9186,31 @@ var easings = Object.freeze({
 	function cleanupInstance(instance, elementApi) {
 	  var actionItem = instance.actionItem,
 	      element = instance.element;
-	  var getStyle = elementApi.getStyle;
+	  var setStyle = elementApi.setStyle,
+	      getStyle = elementApi.getStyle;
+	  var actionTypeId = actionItem.actionTypeId;
 
+
+	  if (actionTypeId === STYLE_SIZE) {
+	    var config = actionItem.config;
+
+	    if (config.widthUnit === AUTO) {
+	      setStyle(element, WIDTH, '');
+	    }
+	    if (config.heightUnit === AUTO) {
+	      setStyle(element, HEIGHT, '');
+	    }
+	  }
 
 	  if (getStyle(element, WILL_CHANGE)) {
-	    var actionTypeId = actionItem.actionTypeId;
-
 	    processElementByType({ effect: removeWillChange, actionTypeId: actionTypeId, elementApi: elementApi })(element);
 	  }
 	}
 
-	var processElementByType = function processElementByType(_ref14) {
-	  var effect = _ref14.effect,
-	      actionTypeId = _ref14.actionTypeId,
-	      elementApi = _ref14.elementApi;
+	var processElementByType = function processElementByType(_ref15) {
+	  var effect = _ref15.effect,
+	      actionTypeId = _ref15.actionTypeId,
+	      elementApi = _ref15.elementApi;
 	  return function (element) {
 	    switch (actionTypeId) {
 	      case TRANSFORM_MOVE:
@@ -9196,10 +9260,10 @@ var easings = Object.freeze({
 	  return resultIndex;
 	}
 
-	function reduceListToGroup(_ref15) {
-	  var actionListId = _ref15.actionListId,
-	      actionItemId = _ref15.actionItemId,
-	      rawData = _ref15.rawData;
+	function reduceListToGroup(_ref16) {
+	  var actionListId = _ref16.actionListId,
+	      actionItemId = _ref16.actionItemId,
+	      rawData = _ref16.rawData;
 	  var actionLists = rawData.actionLists;
 
 	  var actionList = actionLists[actionListId];
@@ -9215,8 +9279,8 @@ var easings = Object.freeze({
 	    return actionItem.id === actionItemId;
 	  };
 
-	  actionItemGroups && actionItemGroups.some(function (_ref16) {
-	    var actionItems = _ref16.actionItems;
+	  actionItemGroups && actionItemGroups.some(function (_ref17) {
+	    var actionItems = _ref17.actionItems;
 
 	    return actionItems.some(takeItemUntilMatch);
 	  });
@@ -9224,8 +9288,8 @@ var easings = Object.freeze({
 	  continuousParameterGroups && continuousParameterGroups.some(function (paramGroup) {
 	    var continuousActionGroups = paramGroup.continuousActionGroups;
 
-	    return continuousActionGroups.some(function (_ref17) {
-	      var actionItems = _ref17.actionItems;
+	    return continuousActionGroups.some(function (_ref18) {
+	      var actionItems = _ref18.actionItems;
 
 	      return actionItems.some(takeItemUntilMatch);
 	    });
@@ -9241,8 +9305,8 @@ var easings = Object.freeze({
 	  });
 	}
 
-	function shouldNamespaceEventParameter(eventTypeId, _ref18) {
-	  var basedOn = _ref18.basedOn;
+	function shouldNamespaceEventParameter(eventTypeId, _ref19) {
+	  var basedOn = _ref19.basedOn;
 
 	  return eventTypeId === SCROLLING_IN_VIEW && (basedOn === ELEMENT || basedOn == null) || eventTypeId === MOUSE_MOVE && basedOn === ELEMENT;
 	}
@@ -9447,6 +9511,10 @@ var actions = Object.freeze({
 	  return element.style[prop];
 	}
 
+	function getProperty(element, prop) {
+	  return element[prop];
+	}
+
 	function matchSelector(selector) {
 	  return function (element) {
 	    return element[ELEMENT_MATCHES](selector);
@@ -9531,6 +9599,7 @@ var actions = Object.freeze({
 var elementApi = Object.freeze({
 	  setStyle: setStyle,
 	  getStyle: getStyle,
+	  getProperty: getProperty,
 	  matchSelector: matchSelector,
 	  getQuerySelector: getQuerySelector,
 	  getValidDocument: getValidDocument,
@@ -10406,6 +10475,77 @@ var elementApi = Object.freeze({
 
 	var flow$1 = (flow && typeof flow === 'object' && 'default' in flow ? flow['default'] : flow);
 
+	var _baseClamp = __commonjs(function (module) {
+	/**
+	 * The base implementation of `_.clamp` which doesn't coerce arguments.
+	 *
+	 * @private
+	 * @param {number} number The number to clamp.
+	 * @param {number} [lower] The lower bound.
+	 * @param {number} upper The upper bound.
+	 * @returns {number} Returns the clamped number.
+	 */
+	function baseClamp(number, lower, upper) {
+	  if (number === number) {
+	    if (upper !== undefined) {
+	      number = number <= upper ? number : upper;
+	    }
+	    if (lower !== undefined) {
+	      number = number >= lower ? number : lower;
+	    }
+	  }
+	  return number;
+	}
+
+	module.exports = baseClamp;
+	});
+
+	var require$$1$43 = (_baseClamp && typeof _baseClamp === 'object' && 'default' in _baseClamp ? _baseClamp['default'] : _baseClamp);
+
+	var clamp = __commonjs(function (module) {
+	var baseClamp = require$$1$43,
+	    toNumber = require$$0$10;
+
+	/**
+	 * Clamps `number` within the inclusive `lower` and `upper` bounds.
+	 *
+	 * @static
+	 * @memberOf _
+	 * @since 4.0.0
+	 * @category Number
+	 * @param {number} number The number to clamp.
+	 * @param {number} [lower] The lower bound.
+	 * @param {number} upper The upper bound.
+	 * @returns {number} Returns the clamped number.
+	 * @example
+	 *
+	 * _.clamp(-10, -5, 5);
+	 * // => -5
+	 *
+	 * _.clamp(10, -5, 5);
+	 * // => 5
+	 */
+	function clamp(number, lower, upper) {
+	  if (upper === undefined) {
+	    upper = lower;
+	    lower = undefined;
+	  }
+	  if (upper !== undefined) {
+	    upper = toNumber(upper);
+	    upper = upper === upper ? upper : 0;
+	  }
+	  if (lower !== undefined) {
+	    lower = toNumber(lower);
+	    lower = lower === lower ? lower : 0;
+	  }
+	  return baseClamp(toNumber(number), lower, upper);
+	}
+
+	module.exports = clamp;
+	});
+
+	var clamp$1 = (clamp && typeof clamp === 'object' && 'default' in clamp ? clamp['default'] : clamp);
+
 	var _SLIDER_ACTIVE$SLIDER;
 
 	var composableFilter = function composableFilter(predicate) {
@@ -10491,10 +10631,15 @@ var elementApi = Object.freeze({
 	    return {
 	      scrollLeft: supportOffset ? window.pageXOffset : rootElement.scrollLeft,
 	      scrollTop: supportOffset ? window.pageYOffset : rootElement.scrollTop,
+
+	      // required to remove elasticity in Safari scrolling. 
+	      stiffScrollTop: clamp$1(supportOffset ? window.pageYOffset : rootElement.scrollTop, 0, rootElement.scrollHeight - window.innerHeight),
 	      scrollWidth: rootElement.scrollWidth,
 	      scrollHeight: rootElement.scrollHeight,
 	      clientWidth: rootElement.clientWidth,
-	      clientHeight: rootElement.clientHeight
+	      clientHeight: rootElement.clientHeight,
+	      innerWidth: window.innerWidth,
+	      innerHeight: window.innerHeight
 	    };
 	  };
 	}();
@@ -10521,25 +10666,30 @@ var elementApi = Object.freeze({
 	  return false;
 	};
 
-	var isElementVisible = function isElementVisible(_ref5) {
-	  var element = _ref5.element;
+	var isElementVisible = function isElementVisible(options) {
+	  var element = options.element,
+	      config = options.event.config;
 
 	  var _getDocumentState = getDocumentState(),
 	      clientWidth = _getDocumentState.clientWidth,
 	      clientHeight = _getDocumentState.clientHeight;
 
+	  var scrollOffsetValue = config.scrollOffsetValue;
+	  var scrollOffsetUnit = config.scrollOffsetUnit;
+	  var isPX = scrollOffsetUnit === 'PX';
+
+	  var offsetPadding = isPX ? scrollOffsetValue : clientHeight * (scrollOffsetValue || 0) / 100;
+
 	  return areBoxesIntersecting(element.getBoundingClientRect(), {
 	    left: 0,
-	    top: 0,
+	    top: offsetPadding,
 	    right: clientWidth,
-	    bottom: clientHeight
+	    bottom: clientHeight - offsetPadding
 	  });
 	};
 
 	var whenComponentActiveChange = function whenComponentActiveChange(handler) {
-	  return function (options) {
-	    var oldState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
+	  return function (options, oldState) {
 
 	    var isActive = [COMPONENT_ACTIVE, COMPONENT_INACTIVE].indexOf(options.nativeEvent.type) !== -1 ? options.nativeEvent.type === COMPONENT_ACTIVE : oldState.isActive;
 
@@ -10580,17 +10730,49 @@ var elementApi = Object.freeze({
 	};
 
 	var whenScrollDirectionChange = function whenScrollDirectionChange(handler) {
-	  return function (options, oldState) {
-	    var _getDocumentState2 = getDocumentState(),
-	        scrollTop = _getDocumentState2.scrollTop;
+	  return function (options) {
+	    var oldState = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-	    var newState = {
-	      scrollTop: scrollTop,
-	      scrollingDown: oldState ? scrollTop > oldState.scrollTop : undefined
-	    };
-	    if (oldState && newState.scrollingDown !== oldState.scrollingDown) {
+	    var _getDocumentState2 = getDocumentState(),
+	        scrollTop = _getDocumentState2.stiffScrollTop,
+	        scrollHeight = _getDocumentState2.scrollHeight,
+	        innerHeight = _getDocumentState2.innerHeight;
+
+	    var _options$event = options.event,
+	        config = _options$event.config,
+	        eventTypeId = _options$event.eventTypeId;
+	    var scrollOffsetValue = config.scrollOffsetValue,
+	        scrollOffsetUnit = config.scrollOffsetUnit;
+
+	    var isPX = scrollOffsetUnit === 'PX';
+
+	    var scrollHeightBounds = scrollHeight - innerHeight;
+	    // percent top since innerHeight may change for mobile devices which also changes the scrollTop value.
+	    var percentTop = Number((scrollTop / scrollHeightBounds).toFixed(2));
+
+	    // no state change
+	    if (oldState && oldState.percentTop === percentTop) {
+	      return oldState;
+	    }
+
+	    var scrollTopPadding = (isPX ? scrollOffsetValue : innerHeight * (scrollOffsetValue || 0) / 100) / scrollHeightBounds;
+
+	    var scrollingDown = oldState ? percentTop > oldState.percentTop : undefined;
+	    var scrollDirectionChanged = oldState ? oldState.scrollingDown !== scrollingDown : undefined;
+	    var anchorTop = oldState ? scrollDirectionChanged ? percentTop : oldState.anchorTop : 0;
+	    var inBounds = eventTypeId === PAGE_SCROLL_DOWN ? percentTop >= anchorTop + scrollTopPadding : percentTop <= anchorTop - scrollTopPadding;
+
+	    var newState = babelHelpers.extends({}, oldState, {
+	      percentTop: percentTop,
+	      inBounds: inBounds,
+	      anchorTop: anchorTop,
+	      scrollingDown: scrollingDown
+	    });
+
+	    if (oldState && inBounds && (scrollDirectionChanged || newState.inBounds !== oldState.inBounds)) {
 	      return handler(options, newState) || newState;
 	    }
+
 	    return newState;
 	  };
 	};
@@ -10670,10 +10852,10 @@ var elementApi = Object.freeze({
 	  types: 'click'
 	}, baseActionGroupOptions, {
 	  handler: withFilter(isOrContainsElement, function (options) {
-	    var _ref6 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { clickCount: 1 };
+	    var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { clickCount: 1 };
 
-	    var clickCount = _ref6.clickCount,
-	        restState = babelHelpers.objectWithoutProperties(_ref6, ['clickCount']);
+	    var clickCount = _ref5.clickCount,
+	        restState = babelHelpers.objectWithoutProperties(_ref5, ['clickCount']);
 
 	    if (clickCount % 2 === 0) {
 	      clickCount = 0;
@@ -10701,12 +10883,12 @@ var elementApi = Object.freeze({
 	  }))
 	}), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, MOUSE_MOVE, {
 	  types: 'mousemove mouseout scroll',
-	  handler: function handler(_ref7) {
-	    var store = _ref7.store,
-	        element = _ref7.element,
-	        eventConfig = _ref7.eventConfig,
-	        event = _ref7.event,
-	        nativeEvent = _ref7.nativeEvent;
+	  handler: function handler(_ref6) {
+	    var store = _ref6.store,
+	        element = _ref6.element,
+	        eventConfig = _ref6.eventConfig,
+	        event = _ref6.event,
+	        nativeEvent = _ref6.nativeEvent;
 	    var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { clientX: 0, clientY: 0, pageX: 0, pageY: 0 };
 	    var basedOn = eventConfig.basedOn,
 	        selectedAxis = eventConfig.selectedAxis,
@@ -10806,9 +10988,9 @@ var elementApi = Object.freeze({
 	  }
 	}), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, PAGE_SCROLL, {
 	  types: CONTINUOUS_SCROLL_EVENT_TYPES,
-	  handler: function handler(_ref8) {
-	    var store = _ref8.store,
-	        eventConfig = _ref8.eventConfig;
+	  handler: function handler(_ref7) {
+	    var store = _ref7.store,
+	        eventConfig = _ref7.eventConfig;
 	    var continuousParameterGroupId = eventConfig.continuousParameterGroupId,
 	        reverse = eventConfig.reverse;
 
@@ -10823,11 +11005,11 @@ var elementApi = Object.freeze({
 	  }
 	}), babelHelpers.defineProperty(_SLIDER_ACTIVE$SLIDER, SCROLLING_IN_VIEW, {
 	  types: CONTINUOUS_SCROLL_EVENT_TYPES,
-	  handler: function handler(_ref9) {
-	    var element = _ref9.element,
-	        store = _ref9.store,
-	        eventConfig = _ref9.eventConfig,
-	        event = _ref9.event;
+	  handler: function handler(_ref8) {
+	    var element = _ref8.element,
+	        store = _ref8.store,
+	        eventConfig = _ref8.eventConfig,
+	        event = _ref8.event;
 	    var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { scrollPercent: 0 };
 
 	    var _getDocumentState6 = getDocumentState(),
@@ -11116,7 +11298,7 @@ var elementApi = Object.freeze({
 
 	    var actionGroups = instanceActionGroups[key];
 	    var actionItem = get$1(actionGroups, '[0].actionItems[0]', {});
-	    var destination = getDestinationValues(actionItem);
+	    var destination = getDestinationValues({ element: element, actionItem: actionItem, elementApi: elementApi });
 	    createInstance({
 	      store: store,
 	      element: element,
@@ -11364,7 +11546,7 @@ var elementApi = Object.freeze({
 
 	      itemElements.forEach(function (element) {
 	        createInstance({
-	          destination: getDestinationValues(actionItem),
+	          destination: getDestinationValues({ element: element, actionItem: actionItem, elementApi: elementApi }),
 	          origin: getInstanceOrigin({ element: element, actionItem: actionItem, elementApi: elementApi }),
 	          immediate: true,
 	          store: store,
@@ -11465,7 +11647,7 @@ var elementApi = Object.freeze({
 	      var isCarrier = carrierIndex === actionIndex && elementIndex === 0;
 	      var computedStyle = getComputedStyle({ element: element, actionItem: actionItem });
 	      var origin = getInstanceOrigin({ element: element, actionItem: actionItem, computedStyle: computedStyle, elementApi: elementApi });
-	      var destination = getDestinationValues(actionItem);
+	      var destination = getDestinationValues({ element: element, actionItem: actionItem, elementApi: elementApi });
 	      createInstance({
 	        store: store,
 	        element: element,
@@ -13292,7 +13474,7 @@ Webflow.require('ix').init([
   {"slug":"fade-in-right-scroll-in","name":"Fade in right (scroll in)","value":{"style":{"opacity":0,"x":"50px","y":"0px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 1000ms ease 0ms, opacity 1000ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fade-in-top-scroll-in","name":"Fade in top (scroll in)","value":{"style":{"opacity":0,"x":"0px","y":"-50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 1000ms ease 0ms, opacity 1000ms ease 0ms","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"fade-in-bottom-scroll-in","name":"Fade in bottom (scroll in)","value":{"style":{"opacity":0,"x":"0px","y":"50px","z":"0px"},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 1300ms ease 0, opacity 1500ms ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
-  {"slug":"bounce-in-scroll-in","name":"Bounce in (scroll in)","value":{"style":{"opacity":0,"scaleX":0.6000000000000005,"scaleY":0.6000000000000005,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 600ms ease 0ms, opacity 600ms ease 0ms","scaleX":1.08,"scaleY":1.08,"scaleZ":1},{"transition":"transform 150ms ease-out-cubic 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
+  {"slug":"bounce-in-scroll-in","name":"Bounce in (scroll in)","value":{"style":{"opacity":0,"scaleX":0.6000000000000006,"scaleY":0.6000000000000006,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 600ms ease 0ms, opacity 600ms ease 0ms","scaleX":1.08,"scaleY":1.08,"scaleZ":1},{"transition":"transform 150ms ease-out-cubic 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
   {"slug":"scale-on-scroll","name":"Scale on Scroll","value":{"style":{"opacity":0,"scaleX":0.01,"scaleY":0.01,"scaleZ":1},"triggers":[{"type":"scroll","stepsA":[{"opacity":1,"transition":"transform 600ms ease 0ms, opacity 600ms ease 0ms","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[]}]}},
   {"slug":"new-interaction","name":"New Interaction","value":{"style":{},"triggers":[]}},
   {"slug":"bounce-down","name":"bounce down","value":{"style":{},"triggers":[{"type":"load","loopA":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"10px","z":"0px"},{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"},{"wait":"600ms","transition":"transform 200 ease 0"}],"stepsB":[]}]}},
@@ -13302,7 +13484,7 @@ Webflow.require('ix').init([
   {"slug":"on-hover-text-fade-in","name":"on hover text fade in","value":{"style":{},"triggers":[{"type":"hover","selector":".on-hover-text","preserve3d":true,"stepsA":[{"opacity":1,"transition":"transform 200 ease 0, opacity 200 ease 0"},{"transition":"transform 100ms ease 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[{"opacity":0,"transition":"opacity 200 ease 0"},{"transition":"transform 100ms ease 0","scaleX":1.1,"scaleY":1.1,"scaleZ":1}]}]}},
   {"slug":"on-hove-text-fade-in-and-out","name":"on hove text fade in and out","value":{"style":{"scaleX":1.1,"scaleY":1.1,"scaleZ":1},"triggers":[{"type":"hover","stepsA":[{"opacity":1,"transition":"opacity 500ms ease 0, transform 200 ease 0","scaleX":1,"scaleY":1,"scaleZ":1}],"stepsB":[{"opacity":0,"transition":"opacity 500ms ease 0, transform 200 ease 0","scaleX":1.1,"scaleY":1.1,"scaleZ":1}]}]}},
   {"slug":"new-interaction-2","name":"New Interaction 2","value":{"style":{},"triggers":[{"type":"navbar","stepsA":[],"stepsB":[]}]}},
-  {"slug":"button-deselect-experimental","name":"button deselect experimental","value":{"style":{},"triggers":[{"type":"click","selector":".linkedinimg","stepsA":[{"opacity":0.3,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]},{"type":"click","selector":".lumidimg","stepsA":[{"opacity":0.5,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}},
+  {"slug":"button-deselect-experimental","name":"button deselect experimental","value":{"style":{},"triggers":[{"type":"click","selector":".linkedinimg","stepsA":[{"opacity":0.30000000000000004,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]},{"type":"click","selector":".lumidimg","stepsA":[{"opacity":0.5,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}},
   {"slug":"bounce-upward","name":"bounce upward","value":{"style":{},"triggers":[{"type":"load","loopA":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"-8px","z":"0px"},{"wait":"500ms","transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"}],"stepsB":[]}]}},
   {"slug":"on-hover-rotate","name":"on hover rotate ","value":{"style":{},"triggers":[{"type":"hover","loopA":true,"loopB":true,"stepsA":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"360deg"}],"stepsB":[{"transition":"transform 500ms ease 0","rotateX":"0deg","rotateY":"0deg","rotateZ":"0deg"}]}]}},
   {"slug":"home-arrow","name":"home arrow","value":{"style":{},"triggers":[{"type":"hover","selector":".text-block-31","loopB":true,"preserve3d":true,"stepsA":[{"transition":"transform 200 ease 0","x":"0px","y":"10px","z":"0px"}],"stepsB":[{"transition":"transform 200 ease 0","x":"0px","y":"0px","z":"0px"}]},{"type":"hover","selector":".image-53","stepsA":[{"opacity":0,"transition":"opacity 200 ease 0"}],"stepsB":[{"opacity":1,"transition":"opacity 200 ease 0"}]}]}},
