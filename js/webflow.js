@@ -3218,6 +3218,7 @@ var easings = Object.freeze({
 	            actionItem = _action$payload.actionItem,
 	            element = _action$payload.element,
 	            eventId = _action$payload.eventId,
+	            eventTarget = _action$payload.eventTarget,
 	            actionListId = _action$payload.actionListId,
 	            groupIndex = _action$payload.groupIndex,
 	            isCarrier = _action$payload.isCarrier,
@@ -3255,6 +3256,7 @@ var easings = Object.freeze({
 	            actionItem: actionItem,
 	            element: element,
 	            eventId: eventId,
+	            eventTarget: eventTarget,
 	            actionListId: actionListId,
 	            groupIndex: groupIndex,
 	            isTransform: isTransform,
@@ -8401,6 +8403,11 @@ var easings = Object.freeze({
 	var WILL_CHANGE = 'willChange';
 	var AUTO = 'AUTO';
 	var COMMA_DELIMITER = ',';
+	var COLON_DELIMITER = ':';
+	var BAR_DELIMITER = '|';
+	var CHILDREN = 'CHILDREN';
+	var IMMEDIATE_CHILDREN = 'IMMEDIATE_CHILDREN';
+	var SIBLINGS = 'SIBLINGS';
 
 	var IS_BROWSER_ENV = typeof window !== 'undefined';
 
@@ -8564,9 +8571,10 @@ var easings = Object.freeze({
 	    var id = target.id,
 	        selector = target.selector,
 	        selectorGuids = target.selectorGuids,
-	        appliesTo = target.appliesTo;
+	        appliesTo = target.appliesTo,
+	        useEventTarget = target.useEventTarget;
 
-	    return { id: id, selector: selector, selectorGuids: selectorGuids, appliesTo: appliesTo };
+	    return { id: id, selector: selector, selectorGuids: selectorGuids, appliesTo: appliesTo, useEventTarget: useEventTarget };
 	  }
 	  return {};
 	}
@@ -8574,6 +8582,7 @@ var easings = Object.freeze({
 	function getAffectedElements(_ref3) {
 	  var config = _ref3.config,
 	      event = _ref3.event,
+	      eventTarget = _ref3.eventTarget,
 	      elementApi = _ref3.elementApi;
 
 	  if (!elementApi) {
@@ -8595,7 +8604,8 @@ var easings = Object.freeze({
 	  var _normalizeTarget = normalizeTarget(target),
 	      id = _normalizeTarget.id,
 	      selector = _normalizeTarget.selector,
-	      appliesTo = _normalizeTarget.appliesTo;
+	      appliesTo = _normalizeTarget.appliesTo,
+	      useEventTarget = _normalizeTarget.useEventTarget;
 
 	  if (appliesTo === PAGE) {
 	    var doc = getValidDocument(id);
@@ -8622,11 +8632,27 @@ var easings = Object.freeze({
 	    return [];
 	  }
 
-	  if (limitAffectedElements === 'CHILDREN') {
+	  if (IS_BROWSER_ENV && eventTarget && useEventTarget) {
+	    if (useEventTarget === CHILDREN) {
+	      return queryDocument(finalSelector).filter(function (element) {
+	        return eventTarget.contains(element);
+	      });
+	    }
+	    if (useEventTarget === SIBLINGS) {
+	      return queryDocument(finalSelector).filter(function (element) {
+	        return element !== eventTarget && element.parentNode === eventTarget.parentNode;
+	      });
+	    }
+	    return queryDocument(finalSelector).filter(function (element) {
+	      return eventTarget === element;
+	    });
+	  }
+
+	  if (limitAffectedElements === CHILDREN) {
 	    return queryDocument(baseSelector, finalSelector);
-	  } else if (limitAffectedElements === 'IMMEDIATE_CHILDREN') {
+	  } else if (limitAffectedElements === IMMEDIATE_CHILDREN) {
 	    return getChildElements(queryDocument(baseSelector)).filter(matchSelector(finalSelector));
-	  } else if (limitAffectedElements === 'SIBLINGS') {
+	  } else if (limitAffectedElements === SIBLINGS) {
 	    return getSiblingElements(queryDocument(baseSelector)).filter(matchSelector(finalSelector));
 	  } else {
 	    return queryDocument(finalSelector);
@@ -9311,8 +9337,8 @@ var easings = Object.freeze({
 	  return eventTypeId === SCROLLING_IN_VIEW && (basedOn === ELEMENT || basedOn == null) || eventTypeId === MOUSE_MOVE && basedOn === ELEMENT;
 	}
 
-	function getNamespacedParameterId(eventId, continuousParameterGroupId) {
-	  return eventId + ':' + continuousParameterGroupId;
+	function getNamespacedParameterId(eventStateKey, continuousParameterGroupId) {
+	  return eventStateKey + COLON_DELIMITER + continuousParameterGroupId;
 	}
 
 	function shouldAllowMediaQuery(mediaQueries, mediaQueryKey) {
@@ -9321,6 +9347,20 @@ var easings = Object.freeze({
 	    return true;
 	  }
 	  return mediaQueries.indexOf(mediaQueryKey) !== -1;
+	}
+
+	function stringifyTarget(target) {
+	  if (typeof target === 'string') {
+	    return target;
+	  }
+	  var _target$id = target.id,
+	      id = _target$id === undefined ? '' : _target$id,
+	      _target$selector = target.selector,
+	      selector = _target$selector === undefined ? '' : _target$selector,
+	      _target$useEventTarge = target.useEventTarget,
+	      useEventTarget = _target$useEventTarge === undefined ? '' : _target$useEventTarge;
+
+	  return id + BAR_DELIMITER + selector + BAR_DELIMITER + useEventTarget;
 	}
 
 	var rawDataImported = function rawDataImported(rawData) {
@@ -10575,7 +10615,8 @@ var elementApi = Object.freeze({
 
 	var actionGroupCreator = function actionGroupCreator(_ref3, state) {
 	  var store = _ref3.store,
-	      event = _ref3.event;
+	      event = _ref3.event,
+	      element = _ref3.element;
 	  var eventAction = event.action,
 	      eventId = event.id;
 	  var _eventAction$config = eventAction.config,
@@ -10595,7 +10636,7 @@ var elementApi = Object.freeze({
 	    });
 	  }
 	  stopActionGroup({ store: store, eventId: eventId, actionListId: actionListId });
-	  startActionGroup({ store: store, eventId: eventId, actionListId: actionListId });
+	  startActionGroup({ store: store, eventId: eventId, eventTarget: element, actionListId: actionListId });
 	  return state;
 	};
 
@@ -10632,7 +10673,7 @@ var elementApi = Object.freeze({
 	      scrollLeft: supportOffset ? window.pageXOffset : rootElement.scrollLeft,
 	      scrollTop: supportOffset ? window.pageYOffset : rootElement.scrollTop,
 
-	      // required to remove elasticity in Safari scrolling. 
+	      // required to remove elasticity in Safari scrolling.
 	      stiffScrollTop: clamp$1(supportOffset ? window.pageYOffset : rootElement.scrollTop, 0, rootElement.scrollHeight - window.innerHeight),
 	      scrollWidth: rootElement.scrollWidth,
 	      scrollHeight: rootElement.scrollHeight,
@@ -10697,7 +10738,7 @@ var elementApi = Object.freeze({
 	      isActive: isActive
 	    });
 
-	    if (newState.isActive !== oldState.isActive) {
+	    if (!oldState || newState.isActive !== oldState.isActive) {
 	      return handler(options, newState) || newState;
 	    }
 
@@ -10887,8 +10928,8 @@ var elementApi = Object.freeze({
 	    var store = _ref6.store,
 	        element = _ref6.element,
 	        eventConfig = _ref6.eventConfig,
-	        event = _ref6.event,
-	        nativeEvent = _ref6.nativeEvent;
+	        nativeEvent = _ref6.nativeEvent,
+	        eventStateKey = _ref6.eventStateKey;
 	    var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { clientX: 0, clientY: 0, pageX: 0, pageY: 0 };
 	    var basedOn = eventConfig.basedOn,
 	        selectedAxis = eventConfig.selectedAxis,
@@ -10943,7 +10984,7 @@ var elementApi = Object.freeze({
 	      case ELEMENT:
 	      default:
 	        {
-	          namespacedParameterId = getNamespacedParameterId(event.id, continuousParameterGroupId);
+	          namespacedParameterId = getNamespacedParameterId(eventStateKey, continuousParameterGroupId);
 
 	          var isMouseEvent = nativeEvent.type.indexOf('mouse') === 0;
 
@@ -11009,7 +11050,7 @@ var elementApi = Object.freeze({
 	    var element = _ref8.element,
 	        store = _ref8.store,
 	        eventConfig = _ref8.eventConfig,
-	        event = _ref8.event;
+	        eventStateKey = _ref8.eventStateKey;
 	    var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { scrollPercent: 0 };
 
 	    var _getDocumentState6 = getDocumentState(),
@@ -11047,7 +11088,7 @@ var elementApi = Object.freeze({
 	        scrollPercent: value
 	      };
 	    } else {
-	      var namespacedParameterId = getNamespacedParameterId(event.id, continuousParameterGroupId);
+	      var namespacedParameterId = getNamespacedParameterId(eventStateKey, continuousParameterGroupId);
 	      var elementRect = element.getBoundingClientRect();
 	      var offsetStartPerc = (addStartOffset ? addOffsetValue : 0) / 100;
 	      var offsetEndPerc = (addEndOffset ? endOffsetValue : 0) / 100;
@@ -11238,6 +11279,8 @@ var elementApi = Object.freeze({
 
 	function createGroupInstances(_ref9) {
 	  var store = _ref9.store,
+	      eventStateKey = _ref9.eventStateKey,
+	      eventTarget = _ref9.eventTarget,
 	      eventId = _ref9.eventId,
 	      eventConfig = _ref9.eventConfig,
 	      actionListId = _ref9.actionListId,
@@ -11261,7 +11304,7 @@ var elementApi = Object.freeze({
 	  var parameterId = parameterGroup.id;
 
 	  if (shouldNamespaceEventParameter(eventTypeId, eventConfig)) {
-	    parameterId = getNamespacedParameterId(eventId, parameterId);
+	    parameterId = getNamespacedParameterId(eventStateKey, parameterId);
 	  }
 
 	  continuousActionGroups.forEach(function (actionGroup) {
@@ -11273,19 +11316,18 @@ var elementApi = Object.freeze({
 	      var actionTypeId = actionItem.actionTypeId;
 	      var target = actionItem.config.target;
 
-	      var key = target + ':' + actionTypeId;
-
 	      if (!target) {
 	        return;
 	      }
 
+	      var key = stringifyTarget(target) + COLON_DELIMITER + actionTypeId;
 	      instanceActionGroups[key] = appendActionItem(instanceActionGroups[key], keyframe, actionItem);
 
 	      if (!targetCache[key]) {
 	        targetCache[key] = true;
 	        var config = actionItem.config;
 
-	        getAffectedElements({ config: config, event: event, elementApi: elementApi }).forEach(function (element) {
+	        getAffectedElements({ config: config, event: event, eventTarget: eventTarget, elementApi: elementApi }).forEach(function (element) {
 	          instanceConfigs.push({ element: element, key: key });
 	        });
 	      }
@@ -11397,7 +11439,7 @@ var elementApi = Object.freeze({
 	var forEachEventTarget = function forEachEventTarget(eventTargets, eventCallback) {
 	  forEach$1(eventTargets, function (elements, eventId) {
 	    elements.forEach(function (element, index) {
-	      var eventStateKey = eventId + ':' + index;
+	      var eventStateKey = eventId + COLON_DELIMITER + index;
 	      eventCallback(element, eventId, eventStateKey);
 	    });
 	  });
@@ -11451,14 +11493,19 @@ var elementApi = Object.freeze({
 	          return;
 	        }
 
-	        createGroupInstances({
-	          store: store,
-	          eventId: eventId,
-	          eventConfig: eventConfig,
-	          actionListId: actionListId,
-	          parameterGroup: parameterGroup,
-	          smoothing: smoothing,
-	          restingValue: restingValue
+	        elements.forEach(function (eventTarget, index) {
+	          var eventStateKey = eventId + COLON_DELIMITER + index;
+	          createGroupInstances({
+	            store: store,
+	            eventStateKey: eventStateKey,
+	            eventTarget: eventTarget,
+	            eventId: eventId,
+	            eventConfig: eventConfig,
+	            actionListId: actionListId,
+	            parameterGroup: parameterGroup,
+	            smoothing: smoothing,
+	            restingValue: restingValue
+	          });
 	        });
 	      });
 	    }
@@ -11491,7 +11538,8 @@ var elementApi = Object.freeze({
 	          element: element,
 	          event: event,
 	          eventConfig: eventConfig,
-	          nativeEvent: nativeEvent
+	          nativeEvent: nativeEvent,
+	          eventStateKey: eventStateKey
 	        }, oldState);
 	        if (newState !== oldState) {
 	          store.dispatch(eventStateChanged(eventStateKey, newState));
@@ -11600,6 +11648,7 @@ var elementApi = Object.freeze({
 	function startActionGroup(_ref17) {
 	  var store = _ref17.store,
 	      eventId = _ref17.eventId,
+	      eventTarget = _ref17.eventTarget,
 	      actionListId = _ref17.actionListId,
 	      _ref17$groupIndex = _ref17.groupIndex,
 	      groupIndex = _ref17$groupIndex === undefined ? 0 : _ref17$groupIndex,
@@ -11641,7 +11690,7 @@ var elementApi = Object.freeze({
 	  actionItems.forEach(function (actionItem, actionIndex) {
 	    var config = actionItem.config;
 
-	    var elements = getAffectedElements({ config: config, event: event, elementApi: elementApi });
+	    var elements = getAffectedElements({ config: config, event: event, eventTarget: eventTarget, elementApi: elementApi });
 	    elements.forEach(function (element, elementIndex) {
 	      groupStartResult = true;
 	      var isCarrier = carrierIndex === actionIndex && elementIndex === 0;
@@ -11653,6 +11702,7 @@ var elementApi = Object.freeze({
 	        element: element,
 	        actionItem: actionItem,
 	        eventId: eventId,
+	        eventTarget: eventTarget,
 	        actionListId: actionListId,
 	        groupIndex: groupIndex,
 	        isCarrier: isCarrier,
@@ -11727,11 +11777,27 @@ var elementApi = Object.freeze({
 	      current = instance.current,
 	      groupIndex = instance.groupIndex,
 	      eventId = instance.eventId,
+	      eventTarget = instance.eventTarget,
 	      actionListId = instance.actionListId,
 	      isGeneral = instance.isGeneral,
 	      isCarrier = instance.isCarrier,
 	      verbose = instance.verbose;
 
+	  // Bypass render if current media query is not listed in event config
+
+	  var _store$getState16 = store.getState(),
+	      ixData = _store$getState16.ixData,
+	      ixSession = _store$getState16.ixSession;
+
+	  var events = ixData.events;
+
+	  var event = events[eventId] || {};
+	  var _event$mediaQueries3 = event.mediaQueries,
+	      mediaQueries = _event$mediaQueries3 === undefined ? ixData.mediaQueryKeys : _event$mediaQueries3;
+
+	  if (!shouldAllowMediaQuery(mediaQueries, ixSession.mediaQueryKey)) {
+	    return;
+	  }
 
 	  if (continuous || active || complete) {
 
@@ -11742,7 +11808,7 @@ var elementApi = Object.freeze({
 	    if (complete) {
 
 	      if (isCarrier) {
-	        var started = startActionGroup({ store: store, eventId: eventId, actionListId: actionListId, groupIndex: groupIndex + 1, verbose: verbose });
+	        var started = startActionGroup({ store: store, eventId: eventId, eventTarget: eventTarget, actionListId: actionListId, groupIndex: groupIndex + 1, verbose: verbose });
 	        if (verbose && !started) {
 	          store.dispatch(actionListPlaybackChanged({ actionListId: actionListId, isPlaying: false }));
 	        }
@@ -11900,7 +11966,7 @@ var elementApi = Object.freeze({
 	      .on('tap', selector('close'), handlerHide)
 	      .on('tap', selector('image, caption'), handlerNext);
 	    $refs.container
-	      .on('tap', selector('view, strip'), handlerHide)
+	      .on('tap', selector('view'), handlerHide)
 	      // Prevent images from being dragged around.
 	      .on('dragstart', selector('img'), preventDefault);
 	    $refs.lightbox
@@ -12013,8 +12079,12 @@ var elementApi = Object.freeze({
 	        $refs.view = $newView;
 
 	        if ($refs.items) {
+	          removeClass($refs.items, 'active');
 	          // Mark proper thumbnail as active
-	          addClass(removeClass($refs.items, 'active').eq(index), 'active');
+	          var $activeThumb = $refs.items.eq(index);
+	          addClass($activeThumb, 'active');
+	          // Scroll into view
+	          maybeScroll($activeThumb);
 	        }
 	      }
 	    });
@@ -12110,9 +12180,10 @@ var elementApi = Object.freeze({
 	  function hideLightbox() {
 	    // If the lightbox hasn't been destroyed already
 	    if ($refs) {
+	      // Reset strip scroll, otherwise next lightbox opens scrolled to last position
+	      $refs.strip.scrollLeft(0).empty();
 	      removeClass($refs.html, 'noscroll');
 	      addClass($refs.lightbox, 'hide');
-	      $refs.strip.empty();
 	      $refs.view && $refs.view.remove();
 
 	      // Reset some stuff
@@ -12141,6 +12212,17 @@ var elementApi = Object.freeze({
 	    return function () {
 	      $element.remove();
 	    };
+	  }
+
+	  function maybeScroll($item) {
+	    var itemLeft = $item.position().left;
+	    var stripScrollLeft = $refs.strip.scrollLeft();
+	    var stripWidth = $refs.strip.width();
+	    if (itemLeft < stripScrollLeft || itemLeft > stripWidth + stripScrollLeft) {
+	      tram($refs.strip)
+	        .add('scroll-left 500ms')
+	        .start({'scroll-left': itemLeft});
+	    }
 	  }
 
 	  /**
