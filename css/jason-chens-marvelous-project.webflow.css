@@ -3792,6 +3792,7 @@ figcaption {
   position: static;
   margin-top: 0px;
   margin-bottom: 3%;
+  opacity: 1;
   font-family: paralucent, sans-serif;
   font-weight: 700;
 }
@@ -4229,6 +4230,7 @@ figcaption {
 }
 
 .second-highlight {
+  display: inline;
   font-family: proxima-nova, sans-serif;
   color: #000;
   font-size: 16px;
@@ -4839,6 +4841,11 @@ figcaption {
   max-width: 100%;
 }
 
+.image-51.glimpse {
+  max-width: 50%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
 .div-block-114 {
   box-shadow: 0 0 6px 3px #a8a8a8;
 }
@@ -4853,6 +4860,11 @@ figcaption {
 
 .div-block-116 {
   box-shadow: 0 0 6px 2px #a8a8a8;
+}
+
+.div-block-116.added {
+  margin-top: 5%;
+  box-shadow: none;
 }
 
 .link-block-17 {
@@ -5325,6 +5337,50 @@ figcaption {
 
 .row-14 {
   margin-bottom: 6%;
+}
+
+.story-des {
+  margin-top: 0px;
+  margin-right: 0%;
+  padding-right: 0%;
+  padding-left: 0%;
+  color: #333;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.row-15 {
+  margin-bottom: 1%;
+}
+
+.div-block-129 {
+  margin-bottom: 5%;
+}
+
+.div-block-130 {
+  margin-bottom: 5%;
+}
+
+.image-75 {
+  max-width: 50%;
+}
+
+.story-process {
+  margin-top: 0px;
+  margin-right: 0%;
+  margin-bottom: 2%;
+  padding-right: 0%;
+  padding-left: 0%;
+  font-family: proxima-nova, sans-serif;
+  color: #333;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+}
+
+.image-76 {
+  max-width: 30%;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
@@ -6109,6 +6165,12 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     font-size: 16px;
   }
   .sell-des-4 {
+    font-size: 16px;
+  }
+  .story-des {
+    font-size: 16px;
+  }
+  .story-process {
     font-size: 16px;
   }
 }
