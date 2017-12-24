@@ -5817,7 +5817,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     padding-left: 10%;
   }
   .roadmap {
-    font-size: 25px;
+    font-size: 16px;
   }
   .tertiary-highlight {
     font-size: 14px;
@@ -5959,7 +5959,7 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     font-size: 16px;
   }
   .overview {
-    margin-bottom: 5%;
+    margin-bottom: 10%;
     padding-right: 10%;
     padding-left: 10%;
   }
@@ -6098,11 +6098,24 @@ html.w-mod-js *[data-ix="on-hove-text-fade-in-and-out"] {
     margin-right: 2%;
     font-size: 14px;
   }
+  .div-block-111 {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  .div-block-112 {
+    display: block;
+  }
   .paragraph-17 {
     font-size: 16px;
   }
   .image-52 {
     max-width: 90%;
+  }
+  .div-block-116.added {
+    margin-bottom: 10%;
   }
   .div-block-117 {
     bottom: 25%;
