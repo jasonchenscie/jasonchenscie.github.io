@@ -5494,6 +5494,18 @@ figcaption {
   max-width: 50%;
 }
 
+.image-78 {
+  max-width: 75%;
+  margin-right: 0px;
+  margin-left: 0px;
+}
+
+.lightbox-link-2 {
+  margin-top: 5%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
