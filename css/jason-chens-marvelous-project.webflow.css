@@ -3065,6 +3065,7 @@ figcaption {
 
 .image-27 {
   max-width: 75%;
+  box-shadow: 1px 1px 3px 0 #000;
   cursor: pointer;
 }
 
@@ -5590,6 +5591,10 @@ figcaption {
 .image-88 {
   max-width: 60%;
   box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-89 {
+  max-width: 70%;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
