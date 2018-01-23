@@ -4815,7 +4815,7 @@ figcaption {
   width: 10px;
   height: 100px;
   margin-left: 0%;
-  background-color: #d32f2f;
+  background-color: #1565c0;
 }
 
 .div-block-112.linkedin {
@@ -5504,6 +5504,92 @@ figcaption {
   margin-top: 5%;
   margin-right: auto;
   margin-left: auto;
+}
+
+.image-79 {
+  max-width: 60%;
+  margin-top: 3%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.sub-des {
+  display: inline-block;
+  font-size: 16px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.div-block-134 {
+  margin-bottom: 4%;
+}
+
+.figure-caption-half {
+  width: 50%;
+  margin: 1% auto 4%;
+  padding: 1%;
+  background-color: rgba(96, 125, 139, .04);
+  font-family: proxima-nova, sans-serif;
+  color: #000;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.figure-caption-half.linkedin {
+  margin-bottom: 0%;
+}
+
+.image-80 {
+  max-width: 60%;
+  margin-bottom: 3%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-81 {
+  max-width: 60%;
+  margin-bottom: 4%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-82 {
+  max-width: 60%;
+  margin-bottom: 4%;
+}
+
+.image-83 {
+  max-width: 60%;
+  margin-bottom: 4%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-84 {
+  max-width: 60%;
+  margin-bottom: 4%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-85 {
+  max-width: 65%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-86 {
+  max-width: 65%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.row-16 {
+  margin-bottom: 3%;
+}
+
+.image-87 {
+  max-width: 60%;
+  margin-bottom: 5%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.image-88 {
+  max-width: 60%;
+  box-shadow: 1px 1px 3px 0 #000;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
