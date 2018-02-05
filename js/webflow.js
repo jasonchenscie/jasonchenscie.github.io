@@ -12572,17 +12572,23 @@ var whenPageLoadStart = function whenPageLoadStart(handler) {
   };
 };
 
-var componentActiveOptions = _extends({}, baseActivityActionGroupOptions, {
-  handler: withFilter(isOrContainsElement, whenComponentActiveChange(function (options, state) {
-    return state.isActive ? baseActionGroupOptions.handler(options, state) : state;
-  }))
-});
+var getComponentActiveOptions = function getComponentActiveOptions() {
+  var allowNestedChildrenEvents = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  return _extends({}, baseActivityActionGroupOptions, {
+    handler: withFilter(allowNestedChildrenEvents ? isOrContainsElement : isElement, whenComponentActiveChange(function (options, state) {
+      return state.isActive ? baseActionGroupOptions.handler(options, state) : state;
+    }))
+  });
+};
 
-var componentInactiveOptions = _extends({}, baseActivityActionGroupOptions, {
-  handler: withFilter(isOrContainsElement, whenComponentActiveChange(function (options, state) {
-    return !state.isActive ? baseActionGroupOptions.handler(options, state) : state;
-  }))
-});
+var getComponentInactiveOptions = function getComponentInactiveOptions() {
+  var allowNestedChildrenEvents = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  return _extends({}, baseActivityActionGroupOptions, {
+    handler: withFilter(allowNestedChildrenEvents ? isOrContainsElement : isElement, whenComponentActiveChange(function (options, state) {
+      return !state.isActive ? baseActionGroupOptions.handler(options, state) : state;
+    }))
+  });
+};
 
 var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
   handler: whenElementVisibiltyChange(function (options, state) {
@@ -12613,7 +12619,7 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
   })
 });
 
-/* harmony default export */ __webpack_exports__["a"] = (_SLIDER_ACTIVE$SLIDER = {}, _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["x" /* SLIDER_ACTIVE */], componentActiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["y" /* SLIDER_INACTIVE */], componentInactiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["d" /* DROPDOWN_OPEN */], componentActiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["c" /* DROPDOWN_CLOSE */], componentInactiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["n" /* NAVBAR_OPEN */], componentActiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["m" /* NAVBAR_CLOSE */], componentInactiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["z" /* TAB_ACTIVE */], componentActiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["A" /* TAB_INACTIVE */], componentInactiveOptions), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["f" /* MOUSE_CLICK */], _extends({}, baseActionGroupOptions, {
+/* harmony default export */ __webpack_exports__["a"] = (_SLIDER_ACTIVE$SLIDER = {}, _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["x" /* SLIDER_ACTIVE */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["y" /* SLIDER_INACTIVE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["d" /* DROPDOWN_OPEN */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["c" /* DROPDOWN_CLOSE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["n" /* NAVBAR_OPEN */], getComponentActiveOptions(false)), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["m" /* NAVBAR_CLOSE */], getComponentInactiveOptions(false)), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["z" /* TAB_ACTIVE */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["A" /* TAB_INACTIVE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["f" /* MOUSE_CLICK */], _extends({}, baseActionGroupOptions, {
   types: 'click'
 })), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["k" /* MOUSE_SECOND_CLICK */], _extends({
   types: 'click'
