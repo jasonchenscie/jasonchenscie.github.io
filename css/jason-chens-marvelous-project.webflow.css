@@ -4821,7 +4821,8 @@ figcaption {
 }
 
 .div-block-111 {
-  position: static;
+  position: relative;
+  bottom: 2%;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -4838,6 +4839,11 @@ figcaption {
   align-items: center;
 }
 
+.div-block-111.sr {
+  position: relative;
+  bottom: 2%;
+}
+
 .image-50 {
   max-width: 70%;
 }
@@ -4850,7 +4856,7 @@ figcaption {
   width: 10px;
   height: 100px;
   margin-left: 0%;
-  background-color: #a8a8a8;
+  background-color: rgba(21, 101, 192, .89);
 }
 
 .div-block-112.linkedin {
