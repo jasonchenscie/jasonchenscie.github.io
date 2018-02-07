@@ -4884,6 +4884,10 @@ figcaption {
   background-color: rgba(160, 21, 21, .74);
 }
 
+.div-block-112.glimpse {
+  background-color: #a8a8a8;
+}
+
 .div-block-113 {
   width: 50%;
   max-width: 40%;
@@ -5963,6 +5967,10 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .image-24 {
     max-width: 50%;
   }
+  .sell-tag-2.col {
+    padding-right: 0%;
+    padding-left: 0%;
+  }
   .section-5 {
     height: 80%;
   }
@@ -6079,6 +6087,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .div-block-119 {
     margin-top: 4%;
     padding-left: 15%;
+  }
+  .button-8 {
+    margin-left: 0%;
   }
 }
 
@@ -6249,6 +6260,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .roadmap {
     font-size: 16px;
   }
+  .roadmap.new {
+    display: none;
+  }
   .tertiary-highlight {
     font-size: 14px;
   }
@@ -6406,6 +6420,10 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .spec {
     margin-bottom: 15%;
   }
+  .spec.new {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
   .role-des {
     margin-bottom: 2%;
   }
@@ -6445,8 +6463,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
   }
   .about-heading {
     margin-top: 0%;
-    margin-bottom: 0%;
-    font-size: 24px;
+    margin-bottom: 2%;
+    font-size: 30px;
     text-align: center;
   }
   .about-heading.two {
@@ -6536,7 +6554,7 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .about-tagline {
     margin-right: 0%;
     float: none;
-    font-size: 14px;
+    font-size: 16px;
     text-align: center;
   }
   .div-block-111 {
