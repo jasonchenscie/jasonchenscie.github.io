@@ -1931,7 +1931,9 @@ function getAffectedElements(_ref3) {
       queryDocument = elementApi.queryDocument,
       getChildElements = elementApi.getChildElements,
       getSiblingElements = elementApi.getSiblingElements,
-      matchSelector = elementApi.matchSelector;
+      matchSelector = elementApi.matchSelector,
+      elementContains = elementApi.elementContains,
+      isSiblingNode = elementApi.isSiblingNode;
   var target = config.target;
 
   if (!target) {
@@ -1941,6 +1943,7 @@ function getAffectedElements(_ref3) {
   var _normalizeTarget = normalizeTarget(target),
       id = _normalizeTarget.id,
       selector = _normalizeTarget.selector,
+      selectorGuids = _normalizeTarget.selectorGuids,
       appliesTo = _normalizeTarget.appliesTo,
       useEventTarget = _normalizeTarget.useEventTarget;
 
@@ -1957,32 +1960,43 @@ function getAffectedElements(_ref3) {
   var baseSelector = void 0;
   var finalSelector = void 0;
 
+  var eventTargetSelector = event && getQuerySelector(normalizeTarget(event.target));
+
   if (validOverride) {
     limitAffectedElements = override.limitAffectedElements;
-    baseSelector = getQuerySelector(normalizeTarget(event.target));
+    baseSelector = eventTargetSelector;
     finalSelector = getQuerySelector(override);
   } else {
-    baseSelector = finalSelector = getQuerySelector({ id: id, selector: selector });
+
+    // pass in selectorGuids as well for server-side rendering.
+    baseSelector = finalSelector = getQuerySelector({ id: id, selector: selector, selectorGuids: selectorGuids });
   }
 
   if (baseSelector == null || finalSelector == null) {
     return [];
   }
 
-  if (__WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["c" /* IS_BROWSER_ENV */] && eventTarget && useEventTarget) {
+  if (event && useEventTarget) {
+
+    // eventTarget is not defined when this function is called in a clear request, so find
+    // all target elements associated with the event data, and return affected elements.
+    var eventTargets = eventTarget ? [eventTarget] : queryDocument(eventTargetSelector);
+
     if (useEventTarget === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["f" /* CHILDREN */]) {
-      return queryDocument(finalSelector).filter(function (element) {
-        return eventTarget.contains(element);
+      return queryDocument(finalSelector).filter(function (childElement) {
+        return eventTargets.some(function (targetElement) {
+          return elementContains(targetElement, childElement);
+        });
       });
     }
     if (useEventTarget === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SIBLINGS */]) {
-      return queryDocument(finalSelector).filter(function (element) {
-        return element !== eventTarget && element.parentNode === eventTarget.parentNode;
+      return queryDocument(finalSelector).filter(function (siblingElement) {
+        return eventTargets.some(function (targetElement) {
+          return isSiblingNode(targetElement, siblingElement);
+        });
       });
     }
-    return queryDocument(finalSelector).filter(function (element) {
-      return eventTarget === element;
-    });
+    return eventTargets;
   }
 
   if (limitAffectedElements === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["f" /* CHILDREN */]) {
@@ -12177,6 +12191,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["getQuerySelector"] = getQuerySelector;
 /* harmony export (immutable) */ __webpack_exports__["getValidDocument"] = getValidDocument;
 /* harmony export (immutable) */ __webpack_exports__["queryDocument"] = queryDocument;
+/* harmony export (immutable) */ __webpack_exports__["elementContains"] = elementContains;
+/* harmony export (immutable) */ __webpack_exports__["isSiblingNode"] = isSiblingNode;
 /* harmony export (immutable) */ __webpack_exports__["getChildElements"] = getChildElements;
 /* harmony export (immutable) */ __webpack_exports__["getSiblingElements"] = getSiblingElements;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__constants_IX2EngineConstants__ = __webpack_require__(42);
@@ -12231,6 +12247,14 @@ function getValidDocument(pageId) {
 
 function queryDocument(baseSelector, descendantSelector) {
   return Array.prototype.slice.call(document.querySelectorAll(descendantSelector ? baseSelector + ' ' + descendantSelector : baseSelector));
+}
+
+function elementContains(parent, child) {
+  return parent.contains(child);
+}
+
+function isSiblingNode(a, b) {
+  return a !== b && a.parentNode === b.parentNode;
 }
 
 function getChildElements() {
@@ -12619,6 +12643,8 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
   })
 });
 
+var MOUSE_OUT_ROUND_THRESHOLD = 0.05;
+
 /* harmony default export */ __webpack_exports__["a"] = (_SLIDER_ACTIVE$SLIDER = {}, _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["x" /* SLIDER_ACTIVE */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["y" /* SLIDER_INACTIVE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["d" /* DROPDOWN_OPEN */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["c" /* DROPDOWN_CLOSE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["n" /* NAVBAR_OPEN */], getComponentActiveOptions(false)), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["m" /* NAVBAR_CLOSE */], getComponentInactiveOptions(false)), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["z" /* TAB_ACTIVE */], getComponentActiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["A" /* TAB_INACTIVE */], getComponentInactiveOptions()), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["f" /* MOUSE_CLICK */], _extends({}, baseActionGroupOptions, {
   types: 'click'
 })), _defineProperty(_SLIDER_ACTIVE$SLIDER, __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["k" /* MOUSE_SECOND_CLICK */], _extends({
@@ -12680,6 +12706,7 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
 
     var isXAxis = selectedAxis === 'X_AXIS';
     var isMouseOut = nativeEvent.type === 'mouseout';
+
     var value = restingState / 100;
     var namespacedParameterId = continuousParameterGroupId;
     var elementHovered = false;
@@ -12687,30 +12714,18 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
     switch (basedOn) {
       case __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["B" /* VIEWPORT */]:
         {
-          if (isMouseOut) {
-            break;
-          }
-
-          var _getDocumentState3 = getDocumentState(),
-              scrollLeft = _getDocumentState3.scrollLeft,
-              scrollTop = _getDocumentState3.scrollTop;
-
-          value = isXAxis ? Math.min(scrollLeft + clientX, window.innerWidth) / window.innerWidth : Math.min(scrollTop + clientY, window.innerHeight) / window.innerHeight;
+          value = isXAxis ? Math.min(clientX, window.innerWidth) / window.innerWidth : Math.min(clientY, window.innerHeight) / window.innerHeight;
           break;
         }
       case __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["o" /* PAGE */]:
         {
-          if (isMouseOut) {
-            break;
-          }
+          var _getDocumentState3 = getDocumentState(),
+              scrollLeft = _getDocumentState3.scrollLeft,
+              scrollTop = _getDocumentState3.scrollTop,
+              scrollWidth = _getDocumentState3.scrollWidth,
+              scrollHeight = _getDocumentState3.scrollHeight;
 
-          var _getDocumentState4 = getDocumentState(),
-              _scrollLeft = _getDocumentState4.scrollLeft,
-              _scrollTop = _getDocumentState4.scrollTop,
-              scrollWidth = _getDocumentState4.scrollWidth,
-              scrollHeight = _getDocumentState4.scrollHeight;
-
-          value = isXAxis ? Math.min(_scrollLeft + pageX, scrollWidth) / scrollWidth : Math.min(_scrollTop + pageY, scrollHeight) / scrollHeight;
+          value = isXAxis ? Math.min(scrollLeft + pageX, scrollWidth) / scrollWidth : Math.min(scrollTop + pageY, scrollHeight) / scrollHeight;
           break;
         }
       case __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["e" /* ELEMENT */]:
@@ -12745,6 +12760,11 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
         }
     }
 
+    // cover case where the event is a mouse out, but the value is not quite at 100%
+    if (isMouseOut && (value > 1 - MOUSE_OUT_ROUND_THRESHOLD || value < MOUSE_OUT_ROUND_THRESHOLD)) {
+      value = Math.round(value);
+    }
+
     // Only update based on element if the mouse is moving over or has just left the element
     if (basedOn !== __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["e" /* ELEMENT */] || elementHovered || elementHovered !== state.elementHovered) {
       value = reverse ? 1 - value : value;
@@ -12767,10 +12787,10 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
     var continuousParameterGroupId = eventConfig.continuousParameterGroupId,
         reverse = eventConfig.reverse;
 
-    var _getDocumentState5 = getDocumentState(),
-        scrollTop = _getDocumentState5.scrollTop,
-        scrollHeight = _getDocumentState5.scrollHeight,
-        clientHeight = _getDocumentState5.clientHeight;
+    var _getDocumentState4 = getDocumentState(),
+        scrollTop = _getDocumentState4.scrollTop,
+        scrollHeight = _getDocumentState4.scrollHeight,
+        clientHeight = _getDocumentState4.clientHeight;
 
     var value = scrollTop / (scrollHeight - clientHeight);
     value = reverse ? 1 - value : value;
@@ -12785,13 +12805,13 @@ var scrollIntoOutOfViewOptions = _extends({}, baseScrollActionGroupOptions, {
         eventStateKey = _ref8.eventStateKey;
     var state = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : { scrollPercent: 0 };
 
-    var _getDocumentState6 = getDocumentState(),
-        scrollLeft = _getDocumentState6.scrollLeft,
-        scrollTop = _getDocumentState6.scrollTop,
-        scrollWidth = _getDocumentState6.scrollWidth,
-        scrollHeight = _getDocumentState6.scrollHeight,
-        visibleWidth = _getDocumentState6.clientWidth,
-        visibleHeight = _getDocumentState6.clientHeight;
+    var _getDocumentState5 = getDocumentState(),
+        scrollLeft = _getDocumentState5.scrollLeft,
+        scrollTop = _getDocumentState5.scrollTop,
+        scrollWidth = _getDocumentState5.scrollWidth,
+        scrollHeight = _getDocumentState5.scrollHeight,
+        visibleWidth = _getDocumentState5.clientWidth,
+        visibleHeight = _getDocumentState5.clientHeight;
 
     var viewportWidth = scrollWidth - visibleWidth;
     var viewportHeight = scrollHeight - visibleHeight;
@@ -14305,7 +14325,7 @@ Webflow.define('links', module.exports = function ($, _) {
     }
 
     // Ignore empty # links
-    if (href === '#') return;
+    if (href === '#' || href === '') return;
 
     // Determine whether the link should be selected
     var match = tempLink.href === location.href || href === slug || indexPage.test(href) && dirList.test(slug);
