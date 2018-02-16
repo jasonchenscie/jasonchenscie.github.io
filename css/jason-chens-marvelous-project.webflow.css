@@ -6088,6 +6088,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
     margin-top: 4%;
     padding-left: 15%;
   }
+  .roadmap.new {
+    display: none;
+  }
   .button-8 {
     margin-left: 0%;
   }
@@ -6467,6 +6470,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
     font-size: 30px;
     text-align: center;
   }
+  .about-heading.contact {
+    font-size: 24px;
+  }
   .about-heading.two {
     font-size: 14px;
   }
@@ -6474,6 +6480,7 @@ html.w-mod-js *[data-ix="on-load-none"] {
     display: block;
     padding-right: 0%;
     padding-left: 10%;
+    font-size: 24px;
     text-align: left;
   }
   .about-heading.home {
