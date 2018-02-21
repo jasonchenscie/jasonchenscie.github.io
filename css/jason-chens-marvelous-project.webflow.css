@@ -6336,7 +6336,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
     font-size: 16px;
   }
   .div-block-17 {
-    top: 25%;
+    top: 30%;
+    margin-top: 3%;
   }
   .div-block-30 {
     display: block;
@@ -6484,9 +6485,11 @@ html.w-mod-js *[data-ix="on-load-none"] {
     text-align: left;
   }
   .about-heading.home {
+    margin-top: 3%;
     font-size: 24px;
   }
   .about-tag {
+    display: block;
     margin-bottom: 5%;
     font-size: 10px;
   }
@@ -6555,10 +6558,12 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .section-7 {
     position: static;
     height: 60%;
+    margin-top: 3%;
+    padding-top: 2%;
   }
   .div-block-109 {
     position: absolute;
-    top: 15%;
+    top: 16%;
     margin-top: 0%;
   }
   .about-tagline {
@@ -6568,6 +6573,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
     text-align: center;
   }
   .about-tagline.home {
+    padding-right: 5%;
+    padding-left: 5%;
     font-size: 14px;
   }
   .div-block-111 {
