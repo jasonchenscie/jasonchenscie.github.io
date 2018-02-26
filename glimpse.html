@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--  This site was created in Webflow. http://www.webflow.com  -->
-<!--  Last Published: Wed Feb 21 2018 01:46:27 GMT+0000 (UTC)  -->
+<!--  Last Published: Mon Feb 26 2018 20:18:12 GMT+0000 (UTC)  -->
 <html data-wf-page="5a2a4dcd85c02500012ea9b4" data-wf-site="59af0699572c3600011709d8">
 <head>
   <meta charset="utf-8">
@@ -40,12 +40,20 @@
     </div>
   </div>
   <div data-ix="fade-in-bottom-scroll-in" class="overview">
-    <h1 class="section-title">ABOUT GLIMPSE</h1>
-    <p class="story-des">Glimpse is a light sculpture visualizing “<strong class="second-highlight">fear drive</strong>” – something personally important that causes people fear yet motivates them to achieve certain goals. On the surface level, “fear drive” may seem terrifying and so cause people to avoid confronting them, <strong class="second-highlight">Through Glimpse, users could learn to see their “fear drive” as an ordinary yet aesthetic object</strong>. With the use of <strong class="second-highlight">affective computing</strong> techniques, Glimpse encourages its users to accept and actively contemplate about their fear drive. <br>
-      <br>Glimpse consists of <strong class="second-highlight">two</strong> parts – 1) a paper triangular prism with cut-out abstract text that describes users’ fear drive, 2) RGB LED that reflects the emotion behind the text. Each light sculpture represents distinct individual’s fear drive.<br><strong class="second-highlight"></strong></p>
-    <a href="https://drive.google.com/file/d/1YrOSC1yHmQ06JBeDFcRu2apBJ7OgnqsM/view?usp=sharing" target="_blank" class="link-block-17 w-inline-block">
-      <div class="div-block-116 added"><img src="images/屏幕截图55.png" class="image-51 glimpse"></div>
-    </a>
+    <h1 class="section-title">ABOUT GLIMPSE 1.0</h1>
+    <p class="story-des">Glimpse 1.0 comprises of <strong class="second-highlight">a jar with three RGB LEDs and a paper prism</strong>. It represents an individual user&#x27;s <strong class="second-highlight">fear drive</strong>.<br><br><strong class="second-highlight">Fear drive</strong> refers to something that causes one fear yet motivates them to achieve certain goals, and it has three dimensions – fear, motivation, and goal. “Fear drive” and its dimensions are inductively realized from previous user research.<br>
+      <br> Previous research has shown that confrontation is an effective way to understand one’s fear drive; however, it needs not to be a daunting experience. <strong class="second-highlight">Through Glimpse, users learn to see their fear drives as ordinary yet aesthetic objects, and are encouraged to actively contemplate about them.</strong> <br>
+      <br> This is a side project inspired by tangible emotion design, ubiquitous technologies for reflection, and affective computing technology.<br><strong class="second-highlight"></strong></p>
+  </div>
+  <div data-ix="fade-in-bottom-scroll-in" class="overview">
+    <h1 class="section-title">METHOD SPEC</h1>
+    <p class="story-process">How was each Glimpse light sculpture made?<strong class="second-highlight"></strong></p><a href="#" class="button-7 w-button" data-ix="click-to-display">Learn More</a>
+    <div class="method-spec" data-ix="display-none-on-load">
+      <div class="div-block-129">
+        <p class="story-des"><strong class="second-highlight">The user is first interviewed</strong> about their fear drive, and their individual interview data is <strong class="second-highlight">classified</strong> into 3 dimensions – fear, motivation, and goal. <br>
+          <br> Through the <a href="https://www.ibm.com/watson/services/tone-analyzer/" target="_blank">IBM Tone Analyzer</a>, emotional values (e.g. sadness 0.86, anger 0.12, etc.) of each dimension of user’s interview are <strong class="second-highlight">extracted and translated</strong> into RGB LED light color. For example, 0.86 of sadness produces 0.86*255 blueness in the RGB LED. <br><br><strong class="second-highlight">Each dimension of the individual interview is also processed into a word cloud</strong> and cut out respectively on each side of the paper prism. <br><br>Pointing the RGD LED light from each dimension to each side of the paper prism accordingly, Glimpse invites users to engage and reinterpret their fear drives in an emotional and semantic level.</p>
+      </div>
+    </div>
   </div>
   <div data-ix="fade-in-bottom-scroll-in" class="overview">
     <h1 class="section-title">INSTALLATION</h1>
@@ -113,43 +121,7 @@
   ],
   "group": "Glimpse"
 }</script></a></div>
-    </div>
-  </div>
-  <div data-ix="fade-in-bottom-scroll-in" class="overview">
-    <h1 class="section-title">FEAR DRIVE</h1>
-    <p class="story-des">Fear drive contains three dimensions – fear, motivation, and goal. They intertwine with each other in a way that is difficult to distinct one from another.<br>
-      <br> This is inductively generated from in-depth interview with 5 people as well as literature review.<br><strong class="second-highlight"></strong></p>
-  </div>
-  <div data-ix="fade-in-bottom-scroll-in" class="overview">
-    <h1 class="section-title">METHOD SPEC</h1>
-    <p class="story-process">How was each Glimpse light sculpture made?<strong class="second-highlight"></strong></p><a href="#" class="button-7 w-button" data-ix="click-to-display">Learn More</a>
-    <div class="method-spec" data-ix="display-none-on-load">
-      <div class="div-block-129">
-        <div class="roadmap">Interview</div>
-        <div class="story-des">I interviewed 2 people, with a focus on what was personally important to them, the potential fear associated to this important thing, what was the goal they were striving for, etc.</div>
-      </div>
-      <div class="div-block-129">
-        <div class="roadmap">Coding the interview</div>
-        <div class="story-des">After the interview, I systematically coded the interview data into categories of “fear”, “motivation” and “goal” for each interviewee.</div>
-      </div>
-      <div class="div-block-129">
-        <div class="roadmap">Word Cloud</div>
-        <div class="story-des">Then, I generated word cloud for each category of interview data. This was to give the users of Glimpse enough room of interpretation to understand their fear drive.</div>
-      </div>
-      <div class="div-block-129">
-        <div class="roadmap">Text cut-out</div>
-        <div class="story-des">The word cloud was then cut out from paper through laser cutting, and the paper folded into a triangular prism, each side representing one dimension of fear drive. The user did not know which side is which, allowing for more interpretation.</div>
-      </div>
-      <div class="div-block-129">
-        <div class="roadmap">Sentiment value to RGB value</div>
-        <div class="story-des">The interview data generated above was then put into <a href="https://www.ibm.com/watson/services/tone-analyzer/" target="_blank">IBM Watson Tone Analyzer</a>, which output the <strong class="second-highlight">sentiment value</strong> of the input text, e.g. sadness 0.67, anger 0.2. The sentiment value was then translated into RGB value using a formula which represented the proportion of each sentiment, e.g. a 0.7 sadness value will generate 255 * 0.7 blue value in RGB LED. If there is more than one sentiment, the final RGB value represents the mixed results of the sentiments.</div>
-      </div>
-      <div class="div-block-129">
-        <div class="roadmap">Anchoring light to corresponding side of the prism</div>
-        <div class="story-des">Each RGB LED was then installed and anchored towards the side of the prism it corresponded, representing the complex emotion one’s fear drive consists of.</div>
-      </div>
-    </div>
-  </div>
+    </div><img src="images/屏幕截图204.png" srcset="images/屏幕截图204.png 500w, images/屏幕截图204.png 800w, images/屏幕截图204.png 1130w" sizes="(max-width: 479px) 76vw, (max-width: 1982px) 57vw, 1130px" class="image-98"></div>
   <div data-ix="fade-in-bottom-scroll-in" class="overview">
     <h1 class="section-title">PROTOTYPING HIGHLIGHT</h1>
     <p class="story-process">The entire process of conception, research, and implementation took about 4 months. Below is a very brief highlight of the prototype process. Contact me to learn more!<strong class="second-highlight"></strong></p>
@@ -236,11 +208,14 @@
       <div class="roadmap">Prototype 3</div>
       <div class="story-process">Finally, I set all the glasses together and experimented with positions and light interaction</div><img src="images/ezgif.com-optimize-1.gif" class="image-75"></div>
   </div>
+  <div data-ix="fade-in-bottom-scroll-in" class="overview">
+    <h1 class="section-title">FUTURE WORK</h1>
+    <p class="story-process">I drafted a proposal to scale up Glimpse, and submitted it to the Adobe Creative Residency program. The project proposal is currently under review. You can view the proposal below.<strong class="second-highlight"></strong></p><img src="images/屏幕截图203.png"><img src="images/屏幕截图205.png" srcset="images/屏幕截图205.png 500w, images/屏幕截图205.png 1128w" sizes="(max-width: 479px) 80vw, (max-width: 1880px) 60vw, 1128px" class="image-99"></div>
   <div data-ix="fade-in-bottom-scroll-in" class="sell-block">
     <h1 class="section-title">Reflecting Forward</h1>
     <div class="div-block-44">
       <div class="sell-tag-2"><span>Conceptualization // Embrace Ambiguity // Design // Installation // Pondering</span></div>
-      <p class="sell-des">This project nicely combined my philosophy background as well as my design background. From this project, I have learned to think by doing, even if that question was as complex as human nature. By designing Glimpse, I really feel that I have understood my &quot;fear drive&quot; a lot more. This project led me to ask - what would happen if people put Glimpse in their own room? What thoughts would be evoked if one can visually see their own fear drive constantly? <strong class="second-highlight">I plan to conduct a long-term study examining the effect of Glimpse on people soon. Stay tuned!</strong></p>
+      <p class="sell-des">This project starts from my <strong class="second-highlight">personal investigation</strong> of my own fear drive, and I have learned to investigate things as abstract as human nature through the process of making. I have also learned the unique interaction between light and different materials (paper, glass, etc.), and have learned the importance of positioning in installation. For Glimpse 2.0, I will make sure <strong class="second-highlight">not</strong> to arrange different sculptures in a closely packed triangular pattern, because this makes people think they are related!</p>
     </div>
     <div>
       <div class="div-block-43">

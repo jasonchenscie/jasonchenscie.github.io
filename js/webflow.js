@@ -8162,6 +8162,10 @@ var continuousInstance = function continuousInstance(state, action) {
         actionItems = _actionGroups$i.actionItems;
 
 
+    if (i === 0) {
+      fromActionItem = actionItems[0];
+    }
+
     if (keyframePosition >= keyframe) {
       fromActionItem = actionItems[0];
 
