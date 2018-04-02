@@ -5885,6 +5885,7 @@ figcaption {
 }
 
 .max-process-pic {
+  display: block;
   border: 1px solid #000;
   box-shadow: 7px 7px 0 0 #000;
 }
