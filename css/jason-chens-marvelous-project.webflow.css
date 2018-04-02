@@ -3837,7 +3837,7 @@ figcaption {
 
 .heading-13 {
   position: static;
-  margin-top: 0px;
+  margin-top: 8%;
   margin-bottom: 3%;
   opacity: 1;
   font-family: paralucent, sans-serif;
@@ -5874,7 +5874,7 @@ figcaption {
 }
 
 .image-100 {
-  max-width: 90%;
+  max-width: 100%;
   box-shadow: 8px 8px 0 2px #000;
 }
 
@@ -5902,6 +5902,22 @@ figcaption {
 
 .max-hifi {
   box-shadow: 1px 1px 3px 0 #000;
+}
+
+.row-22 {
+  margin-bottom: 7%;
+}
+
+.image-102 {
+  display: block;
+  border: 1px solid #000;
+  box-shadow: 4px 4px 0 2px #000;
+}
+
+.image-103 {
+  display: block;
+  border: 1px solid #000;
+  box-shadow: 4px 4px 0 2px #000;
 }
 
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
