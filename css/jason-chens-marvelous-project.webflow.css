@@ -2884,6 +2884,10 @@ figcaption {
   padding-left: 20%;
 }
 
+.sell-des.max {
+  text-align: center;
+}
+
 .sell-des-2 {
   padding-right: 15%;
   padding-left: 15%;
@@ -3859,10 +3863,16 @@ figcaption {
 }
 
 .text-block-21 {
-  margin-bottom: 10%;
+  margin-bottom: 0%;
   opacity: 1;
+  font-family: proxima-nova, sans-serif;
   font-size: 14px;
   font-weight: 300;
+}
+
+.text-block-21.project {
+  margin-bottom: 0%;
+  text-align: center;
 }
 
 .navbar-6 {
@@ -4013,7 +4023,7 @@ figcaption {
   left: 0px;
   top: 0px;
   right: 0px;
-  margin-top: 2%;
+  margin-top: 0%;
   margin-bottom: 1%;
   font-family: paralucent, sans-serif;
   font-size: 38px;
@@ -4803,6 +4813,7 @@ figcaption {
 }
 
 .about-tagline {
+  margin-bottom: 2%;
   font-family: proxima-nova, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -4893,6 +4904,11 @@ figcaption {
 
 .div-block-112.glimpse {
   background-color: #a8a8a8;
+}
+
+.div-block-112.maxsearch {
+  padding-right: 0px;
+  background-color: #3e58aa;
 }
 
 .div-block-113 {
@@ -5210,6 +5226,10 @@ figcaption {
 .roadmap.new {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.roadmap.max {
+  color: #1565c0;
 }
 
 .tertiary-highlight {
@@ -5848,6 +5868,41 @@ figcaption {
   font-weight: 400;
 }
 
+.link-block-19 {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+.image-100 {
+  max-width: 90%;
+  box-shadow: 8px 8px 0 2px #000;
+}
+
+.text-span-9 {
+  font-family: proxima-nova, sans-serif;
+  color: #000;
+  font-weight: 300;
+}
+
+.max-process-pic {
+  border: 1px solid #000;
+  box-shadow: 7px 7px 0 0 #000;
+}
+
+.row-21 {
+  margin-bottom: 7%;
+}
+
+.image-101 {
+  max-width: 80%;
+  margin-bottom: 7%;
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
+.max-hifi {
+  box-shadow: 1px 1px 3px 0 #000;
+}
+
 html.w-mod-js *[data-ix="fade-in-bottom-page-loads"] {
   opacity: 0;
   -webkit-transform: translate(0px, 50px);
@@ -6014,9 +6069,21 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .image-24 {
     max-width: 50%;
   }
+  .sell-block {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
+  .sell-tag-2 {
+    padding-right: 15%;
+    padding-left: 15%;
+  }
   .sell-tag-2.col {
     padding-right: 0%;
     padding-left: 0%;
+  }
+  .overview {
+    padding-right: 10%;
+    padding-left: 10%;
   }
   .section-5 {
     height: 80%;
@@ -6083,6 +6150,25 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .column-14 {
     padding-right: 10px;
   }
+  .div-block-112 {
+    display: none;
+  }
+  .div-block-112.linkedin {
+    display: none;
+  }
+  .div-block-112.rc {
+    display: none;
+  }
+  .div-block-112.lumid {
+    display: none;
+  }
+  .div-block-112.coloraway {
+    display: none;
+  }
+  .paragraph-17 {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
   .text-block-31 {
     font-size: 14px;
   }
@@ -6137,6 +6223,14 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .div-block-119 {
     margin-top: 4%;
     padding-left: 15%;
+  }
+  .top-section-left {
+    padding-right: 0%;
+    padding-left: 0%;
+  }
+  .top-section-right {
+    padding-right: 0%;
+    padding-left: 0%;
   }
   .roadmap.new {
     display: none;
@@ -6250,17 +6344,37 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .sell-title {
     font-size: 25px;
   }
+  .sell-tag {
+    padding-right: 5%;
+    padding-left: 5%;
+  }
   .sell-tag-2 {
+    padding-right: 5%;
+    padding-left: 5%;
     font-size: 16px;
+  }
+  .sell-des {
+    padding-right: 5%;
+    padding-left: 5%;
   }
   .sell-des-2 {
     font-size: 14px;
   }
+  .overview {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
   .section-title {
     font-size: 25px;
   }
+  .spec {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
   .section-5 {
     height: 50%;
+    padding-top: 20%;
+    padding-bottom: 20%;
   }
   .navbar-6 {
     display: none;
@@ -6302,10 +6416,39 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .div-block-111 {
     position: absolute;
     bottom: 9px;
-    margin-top: 10%;
+    width: 100%;
+    margin-top: 0%;
+    padding-right: 0%;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+  .div-block-111.sr {
+    margin-top: 0%;
+  }
+  .div-block-112 {
+    display: none;
+  }
+  .div-block-112.linkedin {
+    display: none;
+  }
+  .div-block-112.lumid {
+    display: none;
+  }
+  .div-block-112.maxsearch {
+    display: none;
+  }
+  .div-block-113 {
+    margin-top: 2%;
+    margin-left: 0%;
+  }
+  .image-52 {
+    display: none;
   }
   .div-block-117 {
-    display: none;
+    display: block;
   }
   .navbar-7 {
     display: block;
@@ -6324,7 +6467,7 @@ html.w-mod-js *[data-ix="on-load-none"] {
     font-size: 14px;
   }
   .roadmap-secondary {
-    font-size: 25px;
+    font-size: 16px;
   }
 }
 
@@ -6462,8 +6605,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
   }
   .overview {
     margin-bottom: 10%;
-    padding-right: 10%;
-    padding-left: 10%;
+    padding-right: 5%;
+    padding-left: 5%;
   }
   .section-title {
     font-size: 24px;
@@ -6477,6 +6620,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
   }
   .spec {
     margin-bottom: 15%;
+    padding-right: 10%;
+    padding-left: 10%;
   }
   .spec.new {
     padding-right: 10%;
@@ -6510,6 +6655,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
     font-size: 10px;
     text-align: left;
   }
+  .text-block-21.project {
+    text-align: center;
+  }
   .navbar-6 {
     position: static;
     left: 0px;
@@ -6520,7 +6668,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
     box-shadow: 0 0 6px 3px #fff;
   }
   .tab-link {
-    display: none;
+    display: block;
+    text-align: center;
   }
   .about-heading {
     margin-top: 0%;
@@ -6606,6 +6755,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
   .linkedinimg {
     margin-top: 5%;
   }
+  .tabs-menu-3 {
+    display: block;
+  }
   .paragraph-16 {
     padding-right: 1%;
     padding-left: 1%;
@@ -6686,6 +6838,8 @@ html.w-mod-js *[data-ix="on-load-none"] {
     margin-left: 0%;
   }
   .paragraph-17 {
+    padding-right: 3%;
+    padding-left: 3%;
     font-size: 16px;
   }
   .image-52 {
@@ -6775,6 +6929,9 @@ html.w-mod-js *[data-ix="on-load-none"] {
   }
   .text-span-8 {
     display: none;
+  }
+  .text-block-37 {
+    text-align: center;
   }
 }
 
