@@ -6701,7 +6701,7 @@ Webflow.define('forms', module.exports = function ($, _) {
     } else if (field.attr('required')) {
       if (!value) {
         status = 'Please fill out the required field: ' + name;
-      } else if (emailField.test(name) || emailField.test(field.attr('type'))) {
+      } else if (emailField.test(field.attr('type'))) {
         if (!emailValue.test(value)) {
           status = 'Please enter a valid email address for: ' + name;
         }
