@@ -6295,6 +6295,29 @@ html.w-mod-js *[data-ix="on-load-none"] {
     padding-right: 0px;
     padding-left: 0px;
   }
+  .column-31 {
+    margin-bottom: 3%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .column-32 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .column-33 {
+    margin-bottom: 3%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .column-34 {
+    margin-bottom: 3%;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+  .column-35 {
+    padding-right: 0px;
+    padding-left: 0px;
+  }
 }
 
 @media (max-width: 767px) {

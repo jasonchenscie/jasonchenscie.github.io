@@ -1216,22 +1216,22 @@ module.exports = isSymbol;
 
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return IX2_ID_DELIMITER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return WF_PAGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return WF_PAGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return BOUNDARY_SELECTOR; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return TRANSFORM; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return TRANSLATE_X; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return TRANSLATE_Y; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return TRANSLATE_Z; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return SCALE_X; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SCALE_Y; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SCALE_Z; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return ROTATE_X; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return ROTATE_Y; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return ROTATE_Z; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SKEW_X; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SKEW_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return TRANSFORM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return TRANSLATE_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return TRANSLATE_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return TRANSLATE_Z; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return SCALE_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return SCALE_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SCALE_Z; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return ROTATE_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return ROTATE_Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return ROTATE_Z; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return SKEW_X; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return SKEW_Y; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return OPACITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return WIDTH; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return WIDTH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return HEIGHT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return BACKGROUND_COLOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return BACKGROUND; });
@@ -1239,14 +1239,15 @@ module.exports = isSymbol;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return COLOR; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return DISPLAY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return FLEX; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return WILL_CHANGE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return WILL_CHANGE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AUTO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return COMMA_DELIMITER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COLON_DELIMITER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return BAR_DELIMITER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return CHILDREN; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return IMMEDIATE_CHILDREN; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return SIBLINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return SIBLINGS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return PRESERVE_3D; });
 var IX2_ID_DELIMITER = '|';
 var WF_PAGE = 'data-wf-page';
 var BOUNDARY_SELECTOR = '.w-dyn-item';
@@ -1279,6 +1280,7 @@ var BAR_DELIMITER = '|';
 var CHILDREN = 'CHILDREN';
 var IMMEDIATE_CHILDREN = 'IMMEDIATE_CHILDREN';
 var SIBLINGS = 'SIBLINGS';
+var PRESERVE_3D = 'preserve-3d';
 
 /***/ }),
 /* 23 */
@@ -1949,7 +1951,7 @@ var trim = function trim(v) {
 
 var colorStyleProps = Object.freeze((_Object$freeze = {}, _defineProperty(_Object$freeze, __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["d" /* STYLE_BACKGROUND_COLOR */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["c" /* BACKGROUND_COLOR */]), _defineProperty(_Object$freeze, __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["e" /* STYLE_BORDER */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["e" /* BORDER_COLOR */]), _defineProperty(_Object$freeze, __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["h" /* STYLE_TEXT_COLOR */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["i" /* COLOR */]), _Object$freeze));
 
-var willChangeProps = Object.freeze((_Object$freeze2 = {}, _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["d" /* TRANSFORM_PREFIXED */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["z" /* TRANSFORM */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["c" /* BACKGROUND_COLOR */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["b" /* BACKGROUND */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */]), _Object$freeze2));
+var willChangeProps = Object.freeze((_Object$freeze2 = {}, _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["d" /* TRANSFORM_PREFIXED */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["A" /* TRANSFORM */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["c" /* BACKGROUND_COLOR */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["b" /* BACKGROUND */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */]), _defineProperty(_Object$freeze2, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */]), _Object$freeze2));
 
 var uuid = 1;
 function getInstanceId() {
@@ -2110,7 +2112,7 @@ function getAffectedElements(_ref3) {
           });
         });
       }
-      if (useEventTarget === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["w" /* SIBLINGS */]) {
+      if (useEventTarget === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["x" /* SIBLINGS */]) {
         return queryDocument(finalSelector).filter(function (siblingElement) {
           return eventTargets.some(function (targetElement) {
             return isSiblingNode(targetElement, siblingElement);
@@ -2135,7 +2137,7 @@ function getAffectedElements(_ref3) {
     return queryDocument(baseSelector, finalSelector);
   } else if (limitAffectedElements === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["n" /* IMMEDIATE_CHILDREN */]) {
     return getChildElements(queryDocument(baseSelector)).filter(matchSelector(finalSelector));
-  } else if (limitAffectedElements === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["w" /* SIBLINGS */]) {
+  } else if (limitAffectedElements === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["x" /* SIBLINGS */]) {
     return getSiblingElements(queryDocument(baseSelector)).filter(matchSelector(finalSelector));
   } else {
     return queryDocument(finalSelector);
@@ -2185,7 +2187,7 @@ function getInstanceOrigin(_ref5) {
       return { value: __WEBPACK_IMPORTED_MODULE_1_lodash_defaultTo___default()(parseFloat(getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */])), 1.0) };
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["g" /* STYLE_SIZE */]:
       {
-        var inlineWidth = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */]);
+        var inlineWidth = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */]);
         var inlineHeight = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */]);
         var widthValue = void 0;
         var heightValue = void 0;
@@ -2250,10 +2252,10 @@ function getDestinationValues(_ref6) {
           return { widthValue: widthValue, heightValue: heightValue };
         }
         if (widthUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
-          var temp = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */]);
-          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], '');
+          var temp = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */]);
+          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], '');
           widthValue = getProperty(element, 'offsetWidth');
-          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], temp);
+          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], temp);
         }
         if (heightUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
           var _temp = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */]);
@@ -2319,17 +2321,17 @@ var transformDefaults = (_transformDefaults = {}, _defineProperty(_transformDefa
 })), _transformDefaults);
 
 var paramCapture = '\\(([^)]+)\\)';
-var translateXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["A" /* TRANSLATE_X */] + paramCapture);
-var translateYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_Y */] + paramCapture);
-var translateZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Z */] + paramCapture);
-var scaleXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* SCALE_X */] + paramCapture);
-var scaleYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_Y */] + paramCapture);
-var scaleZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Z */] + paramCapture);
-var rotateXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["q" /* ROTATE_X */] + paramCapture);
-var rotateYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_Y */] + paramCapture);
-var rotateZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Z */] + paramCapture);
-var skewXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["x" /* SKEW_X */] + paramCapture);
-var skewYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_Y */] + paramCapture);
+var translateXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_X */] + paramCapture);
+var translateYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Y */] + paramCapture);
+var translateZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["D" /* TRANSLATE_Z */] + paramCapture);
+var scaleXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_X */] + paramCapture);
+var scaleYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Y */] + paramCapture);
+var scaleZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["w" /* SCALE_Z */] + paramCapture);
+var rotateXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_X */] + paramCapture);
+var rotateYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Y */] + paramCapture);
+var rotateZRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* ROTATE_Z */] + paramCapture);
+var skewXRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_X */] + paramCapture);
+var skewYRegex = RegExp('' + __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["z" /* SKEW_Y */] + paramCapture);
 
 var defaultTransform = Object.keys(transformDefaults).map(function (actionTypeId) {
   var defaults = transformDefaults[actionTypeId];
@@ -2339,13 +2341,13 @@ var defaultTransform = Object.keys(transformDefaults).map(function (actionTypeId
 
   switch (actionTypeId) {
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["i" /* TRANSFORM_MOVE */]:
-      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["A" /* TRANSLATE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Z */], zValue]]);
+      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["D" /* TRANSLATE_Z */], zValue]]);
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["k" /* TRANSFORM_SCALE */]:
-      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* SCALE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Z */], zValue]]);
+      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["w" /* SCALE_Z */], zValue]]);
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["j" /* TRANSFORM_ROTATE */]:
-      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["q" /* ROTATE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Z */], zValue]]);
+      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Y */], yValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* ROTATE_Z */], zValue]]);
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["l" /* TRANSFORM_SKEW */]:
-      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["x" /* SKEW_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_Y */], yValue]]);
+      return fillTransformValues([[__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_X */], xValue], [__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["z" /* SKEW_Y */], yValue]]);
     default:
       return '';
   }
@@ -2417,7 +2419,25 @@ function renderTransform(_ref7, elementApi) {
   if (transform !== newTransform) {
     addWillChange(element, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["d" /* TRANSFORM_PREFIXED */], elementApi);
     setStyle(element, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["d" /* TRANSFORM_PREFIXED */], newTransform);
+    // Set transform-style: preserve-3d
+    if (hasDefined3dTransform(actionItem, current)) {
+      setStyle(element, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["e" /* TRANSFORM_STYLE_PREFIXED */], __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["q" /* PRESERVE_3D */]);
+    }
   }
+}
+
+function hasDefined3dTransform(_ref8, _ref9) {
+  var actionTypeId = _ref8.actionTypeId;
+  var xValue = _ref9.xValue,
+      yValue = _ref9.yValue,
+      zValue = _ref9.zValue;
+
+  // TRANSLATE_Z
+  return actionTypeId === __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["i" /* TRANSFORM_MOVE */] && zValue !== undefined ||
+  // SCALE_Z
+  actionTypeId === __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["k" /* TRANSFORM_SCALE */] && zValue !== undefined ||
+  // ROTATE_X or ROTATE_Y
+  actionTypeId === __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["j" /* TRANSFORM_ROTATE */] && (xValue !== undefined || yValue !== undefined);
 }
 
 function updateTransformValues(transform, actionItem, current) {
@@ -2437,43 +2457,43 @@ function updateTransformValues(transform, actionItem, current) {
   switch (actionTypeId) {
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["i" /* TRANSFORM_MOVE */]:
       if (xValue !== undefined) {
-        result = replaceTransformPart(result, translateXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["A" /* TRANSLATE_X */], xValue + xUnit);
+        result = replaceTransformPart(result, translateXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_X */], xValue + xUnit);
       }
       if (yValue !== undefined) {
-        result = replaceTransformPart(result, translateYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["B" /* TRANSLATE_Y */], yValue + yUnit);
+        result = replaceTransformPart(result, translateYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Y */], yValue + yUnit);
       }
       if (zValue !== undefined) {
-        result = replaceTransformPart(result, translateZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["C" /* TRANSLATE_Z */], zValue + zUnit);
+        result = replaceTransformPart(result, translateZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["D" /* TRANSLATE_Z */], zValue + zUnit);
       }
       return result;
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["k" /* TRANSFORM_SCALE */]:
       if (xValue !== undefined) {
-        result = replaceTransformPart(result, scaleXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* SCALE_X */], xValue + xUnit);
+        result = replaceTransformPart(result, scaleXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_X */], xValue + xUnit);
       }
       if (yValue !== undefined) {
-        result = replaceTransformPart(result, scaleYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["u" /* SCALE_Y */], yValue + yUnit);
+        result = replaceTransformPart(result, scaleYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Y */], yValue + yUnit);
       }
       if (zValue !== undefined) {
-        result = replaceTransformPart(result, scaleZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["v" /* SCALE_Z */], zValue + zUnit);
+        result = replaceTransformPart(result, scaleZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["w" /* SCALE_Z */], zValue + zUnit);
       }
       return result;
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["j" /* TRANSFORM_ROTATE */]:
       if (xValue !== undefined) {
-        result = replaceTransformPart(result, rotateXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["q" /* ROTATE_X */], xValue + xUnit);
+        result = replaceTransformPart(result, rotateXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_X */], xValue + xUnit);
       }
       if (yValue !== undefined) {
-        result = replaceTransformPart(result, rotateYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["r" /* ROTATE_Y */], yValue + yUnit);
+        result = replaceTransformPart(result, rotateYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Y */], yValue + yUnit);
       }
       if (zValue !== undefined) {
-        result = replaceTransformPart(result, rotateZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["s" /* ROTATE_Z */], zValue + zUnit);
+        result = replaceTransformPart(result, rotateZRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["t" /* ROTATE_Z */], zValue + zUnit);
       }
       return result;
     case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["l" /* TRANSFORM_SKEW */]:
       if (xValue !== undefined) {
-        result = replaceTransformPart(result, skewXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["x" /* SKEW_X */], xValue + xUnit);
+        result = replaceTransformPart(result, skewXRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_X */], xValue + xUnit);
       }
       if (yValue !== undefined) {
-        result = replaceTransformPart(result, skewYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["y" /* SKEW_Y */], yValue + yUnit);
+        result = replaceTransformPart(result, skewYRegex, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["z" /* SKEW_Y */], yValue + yUnit);
       }
       return result;
     default:
@@ -2488,11 +2508,11 @@ function replaceTransformPart(input, regex, func, value) {
 var rgbValidRegex = /^rgb/;
 var rgbMatchRegex = RegExp('rgba?' + paramCapture);
 
-function parseColor(_ref8) {
-  var element = _ref8.element,
-      actionTypeId = _ref8.actionTypeId,
-      computedStyle = _ref8.computedStyle,
-      getStyle = _ref8.getStyle;
+function parseColor(_ref10) {
+  var element = _ref10.element,
+      actionTypeId = _ref10.actionTypeId,
+      computedStyle = _ref10.computedStyle,
+      getStyle = _ref10.getStyle;
 
   var prop = colorStyleProps[actionTypeId];
   var inlineValue = getStyle(element, prop);
@@ -2506,11 +2526,11 @@ function parseColor(_ref8) {
   };
 }
 
-function renderStyle(_ref9, elementApi) {
-  var element = _ref9.element,
-      actionItem = _ref9.actionItem,
-      current = _ref9.current,
-      styleProp = _ref9.styleProp;
+function renderStyle(_ref11, elementApi) {
+  var element = _ref11.element,
+      actionItem = _ref11.actionItem,
+      current = _ref11.current,
+      styleProp = _ref11.styleProp;
   var setStyle = elementApi.setStyle;
   var actionTypeId = actionItem.actionTypeId,
       config = actionItem.config;
@@ -2530,8 +2550,8 @@ function renderStyle(_ref9, elementApi) {
           if (widthUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
             widthUnit = 'px';
           }
-          addWillChange(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], elementApi);
-          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], widthValue + widthUnit);
+          addWillChange(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], elementApi);
+          setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], widthValue + widthUnit);
         }
         if (heightValue !== undefined) {
           if (heightUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
@@ -2568,9 +2588,9 @@ function renderStyle(_ref9, elementApi) {
   }
 }
 
-function renderGeneral(_ref10, elementApi) {
-  var element = _ref10.element,
-      actionItem = _ref10.actionItem;
+function renderGeneral(_ref12, elementApi) {
+  var element = _ref12.element,
+      actionItem = _ref12.actionItem;
   var setStyle = elementApi.setStyle;
 
   switch (actionItem.actionTypeId) {
@@ -2599,14 +2619,14 @@ function addWillChange(element, prop, elementApi) {
   var getStyle = elementApi.getStyle,
       setStyle = elementApi.setStyle;
 
-  var value = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */]);
+  var value = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */]);
   if (!value) {
-    setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */], validProp);
+    setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */], validProp);
     return;
   }
   var values = value.split(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]).map(trim);
   if (values.indexOf(validProp) === -1) {
-    setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */], values.concat(validProp).join(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]));
+    setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */], values.concat(validProp).join(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]));
   }
 }
 
@@ -2621,18 +2641,18 @@ function removeWillChange(element, prop, elementApi) {
   var getStyle = elementApi.getStyle,
       setStyle = elementApi.setStyle;
 
-  var value = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */]);
+  var value = getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */]);
   if (!value || value.indexOf(validProp) === -1) {
     return;
   }
-  setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */], value.split(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]).map(trim).filter(function (v) {
+  setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */], value.split(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]).map(trim).filter(function (v) {
     return v !== validProp;
   }).join(__WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["j" /* COMMA_DELIMITER */]));
 }
 
-function clearAllStyles(_ref11) {
-  var store = _ref11.store,
-      elementApi = _ref11.elementApi;
+function clearAllStyles(_ref13) {
+  var store = _ref13.store,
+      elementApi = _ref13.elementApi;
 
   var _store$getState = store.getState(),
       ixData = _store$getState.ixData;
@@ -2657,11 +2677,11 @@ function clearAllStyles(_ref11) {
   });
 }
 
-function clearActionListStyles(_ref12) {
-  var _ref12$actionList = _ref12.actionList,
-      actionList = _ref12$actionList === undefined ? {} : _ref12$actionList,
-      event = _ref12.event,
-      elementApi = _ref12.elementApi;
+function clearActionListStyles(_ref14) {
+  var _ref14$actionList = _ref14.actionList,
+      actionList = _ref14$actionList === undefined ? {} : _ref14$actionList,
+      event = _ref14.event,
+      elementApi = _ref14.elementApi;
   var actionItemGroups = actionList.actionItemGroups,
       continuousParameterGroups = actionList.continuousParameterGroups;
 
@@ -2677,15 +2697,15 @@ function clearActionListStyles(_ref12) {
   });
 }
 
-function clearActionGroupStyles(_ref13) {
-  var actionGroup = _ref13.actionGroup,
-      event = _ref13.event,
-      elementApi = _ref13.elementApi;
+function clearActionGroupStyles(_ref15) {
+  var actionGroup = _ref15.actionGroup,
+      event = _ref15.event,
+      elementApi = _ref15.elementApi;
   var actionItems = actionGroup.actionItems;
 
-  actionItems.forEach(function (_ref14) {
-    var actionTypeId = _ref14.actionTypeId,
-        config = _ref14.config;
+  actionItems.forEach(function (_ref16) {
+    var actionTypeId = _ref16.actionTypeId,
+        config = _ref16.config;
 
     var clearElement = processElementByType({ effect: clearStyleProp, actionTypeId: actionTypeId, elementApi: elementApi });
     getAffectedElements({ config: config, event: event, elementApi: elementApi }).forEach(clearElement);
@@ -2704,22 +2724,22 @@ function cleanupInstance(instance, elementApi) {
     var config = actionItem.config;
 
     if (config.widthUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
-      setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], '');
+      setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], '');
     }
     if (config.heightUnit === __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["a" /* AUTO */]) {
       setStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */], '');
     }
   }
 
-  if (getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WILL_CHANGE */])) {
+  if (getStyle(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["G" /* WILL_CHANGE */])) {
     processElementByType({ effect: removeWillChange, actionTypeId: actionTypeId, elementApi: elementApi })(element);
   }
 }
 
-var processElementByType = function processElementByType(_ref15) {
-  var effect = _ref15.effect,
-      actionTypeId = _ref15.actionTypeId,
-      elementApi = _ref15.elementApi;
+var processElementByType = function processElementByType(_ref17) {
+  var effect = _ref17.effect,
+      actionTypeId = _ref17.actionTypeId,
+      elementApi = _ref17.elementApi;
   return function (element) {
     switch (actionTypeId) {
       case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["i" /* TRANSFORM_MOVE */]:
@@ -2732,7 +2752,7 @@ var processElementByType = function processElementByType(_ref15) {
         effect(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["p" /* OPACITY */], elementApi);
         break;
       case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["g" /* STYLE_SIZE */]:
-        effect(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["E" /* WIDTH */], elementApi);
+        effect(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["F" /* WIDTH */], elementApi);
         effect(element, __WEBPACK_IMPORTED_MODULE_7__constants_IX2EngineConstants__["m" /* HEIGHT */], elementApi);
         break;
       case __WEBPACK_IMPORTED_MODULE_5__constants_IX2EngineItemTypes__["d" /* STYLE_BACKGROUND_COLOR */]:
@@ -2752,6 +2772,10 @@ function clearStyleProp(element, prop, elementApi) {
 
   removeWillChange(element, prop, elementApi);
   setStyle(element, prop, '');
+  // Clear transform-style: preserve-3d
+  if (prop === __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["d" /* TRANSFORM_PREFIXED */]) {
+    setStyle(element, __WEBPACK_IMPORTED_MODULE_8__IX2BrowserSupport__["e" /* TRANSFORM_STYLE_PREFIXED */], '');
+  }
 }
 
 function getMaxDurationItemIndex(actionItems) {
@@ -2798,10 +2822,10 @@ function getActionListProgress(actionList, instance) {
   return totalDuration > 0 ? Object(__WEBPACK_IMPORTED_MODULE_4__IX2EasingUtils__["b" /* optimizeFloat */])(elapsedDuration / totalDuration) : 0;
 }
 
-function reduceListToGroup(_ref16) {
-  var actionListId = _ref16.actionListId,
-      actionItemId = _ref16.actionItemId,
-      rawData = _ref16.rawData;
+function reduceListToGroup(_ref18) {
+  var actionListId = _ref18.actionListId,
+      actionItemId = _ref18.actionItemId,
+      rawData = _ref18.rawData;
   var actionLists = rawData.actionLists;
 
   var actionList = actionLists[actionListId];
@@ -2817,8 +2841,8 @@ function reduceListToGroup(_ref16) {
     return actionItem.id === actionItemId;
   };
 
-  actionItemGroups && actionItemGroups.some(function (_ref17) {
-    var actionItems = _ref17.actionItems;
+  actionItemGroups && actionItemGroups.some(function (_ref19) {
+    var actionItems = _ref19.actionItems;
 
     return actionItems.some(takeItemUntilMatch);
   });
@@ -2826,8 +2850,8 @@ function reduceListToGroup(_ref16) {
   continuousParameterGroups && continuousParameterGroups.some(function (paramGroup) {
     var continuousActionGroups = paramGroup.continuousActionGroups;
 
-    return continuousActionGroups.some(function (_ref18) {
-      var actionItems = _ref18.actionItems;
+    return continuousActionGroups.some(function (_ref20) {
+      var actionItems = _ref20.actionItems;
 
       return actionItems.some(takeItemUntilMatch);
     });
@@ -2843,8 +2867,8 @@ function reduceListToGroup(_ref16) {
   });
 }
 
-function shouldNamespaceEventParameter(eventTypeId, _ref19) {
-  var basedOn = _ref19.basedOn;
+function shouldNamespaceEventParameter(eventTypeId, _ref21) {
+  var basedOn = _ref21.basedOn;
 
   return eventTypeId === __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["u" /* SCROLLING_IN_VIEW */] && (basedOn === __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["e" /* ELEMENT */] || basedOn == null) || eventTypeId === __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["h" /* MOUSE_MOVE */] && basedOn === __WEBPACK_IMPORTED_MODULE_6__constants_IX2EngineEventTypes__["e" /* ELEMENT */];
 }
@@ -5888,6 +5912,7 @@ module.exports = baseClamp;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ELEMENT_MATCHES; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return FLEX_PREFIXED; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return TRANSFORM_PREFIXED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return TRANSFORM_STYLE_PREFIXED; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_find__ = __webpack_require__(57);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_find___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_find__);
 
@@ -5943,6 +5968,10 @@ var TRANSFORM_PREFIXED = withBrowser(function () {
   }
   return 'transform';
 }, 'transform');
+
+var TRANSFORM_PREFIX = TRANSFORM_PREFIXED.split('transform')[0];
+
+var TRANSFORM_STYLE_PREFIXED = TRANSFORM_PREFIX ? TRANSFORM_PREFIX + 'TransformStyle' : 'transformStyle';
 
 /***/ }),
 /* 81 */
@@ -12812,7 +12841,7 @@ function getQuerySelector(_ref) {
       var pageId = pair[0];
       nodeId = pair[1];
       // Short circuit query if we're on the wrong page
-      if (pageId !== document.documentElement.getAttribute(__WEBPACK_IMPORTED_MODULE_0__constants_IX2EngineConstants__["D" /* WF_PAGE */])) {
+      if (pageId !== document.documentElement.getAttribute(__WEBPACK_IMPORTED_MODULE_0__constants_IX2EngineConstants__["E" /* WF_PAGE */])) {
         return null;
       }
     }
@@ -12822,7 +12851,7 @@ function getQuerySelector(_ref) {
 }
 
 function getValidDocument(pageId) {
-  if (pageId == null || pageId === document.documentElement.getAttribute(__WEBPACK_IMPORTED_MODULE_0__constants_IX2EngineConstants__["D" /* WF_PAGE */])) {
+  if (pageId == null || pageId === document.documentElement.getAttribute(__WEBPACK_IMPORTED_MODULE_0__constants_IX2EngineConstants__["E" /* WF_PAGE */])) {
     return document;
   }
   return null;
